@@ -5,13 +5,15 @@ type Props = {
   title?: string;
   description?: string;
   image?: string;
+  robots?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 };
 
 const {
-  title = 'Auténtiko Café | Café de Chiapas, menú y pickup en Tlajomulco',
-  description = 'Menú completo, café de Chiapas tostado por maestro tostador, pickup en tienda y envíos a todo México desde Auténtiko Café.',
-  image = '/brand/autentiko-logo.png',
+  title = 'Auténtiko Café | Cafetería en Guadalajara, menú y café de Chiapas en línea',
+  description = 'Auténtiko Café es una cafetería en Guadalajara sur, en Los Gavilanes, con menú completo, desayunos y café de Chiapas con envío a todo México.',
+  image = '/og-autentiko-cafe.svg',
+  robots = 'index,follow',
   structuredData,
 } = Astro.props;
 
@@ -38,18 +40,22 @@ const structuredDataPayload = structuredData
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Auténtiko Café" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content="Auténtiko Café, cafetería en Guadalajara y café de Chiapas en línea" />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content="Auténtiko Café, cafetería en Guadalajara y café de Chiapas en línea" />
+    <meta name="theme-color" content="#2d6a5b" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

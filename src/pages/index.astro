@@ -9,11 +9,20 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'CafeOrCoffeeShop',
+    '@id': `${Astro.url.origin}/#cafeteria`,
     name: siteConfig.brand,
     image: '/brand/autentiko-logo.png',
     description: siteConfig.description,
     servesCuisine: ['Coffee', 'Breakfast', 'Sandwiches'],
     telephone: siteConfig.whatsappDisplay,
+    priceRange: '$$',
+    hasMap: siteConfig.mapsUrl,
+    areaServed: ['Guadalajara', 'Tlajomulco de Zúñiga', 'México'],
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 20.5694,
+      longitude: -103.4408,
+    },
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Plaza Gavilanes, Local 14, Los Gavilanes',
@@ -48,9 +57,20 @@ const structuredData = [
   {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': `${Astro.url.origin}/#cafe-chiapas`,
     name: `${siteConfig.brand} ${siteConfig.coffeeProduct.name}`,
     description: siteConfig.coffeeProduct.description,
-    brand: siteConfig.brand,
+    brand: {
+      '@type': 'Brand',
+      name: siteConfig.brand,
+    },
+    seller: {
+      '@type': 'CafeOrCoffeeShop',
+      name: siteConfig.brand,
+      url: Astro.url.toString(),
+    },
+    areaServed: 'MX',
+    category: 'Café tostado',
     offers: siteConfig.coffeeProduct.weightOptions.map((option) => ({
       '@type': 'Offer',
       availability: 'https://schema.org/InStock',
@@ -59,14 +79,35 @@ const structuredData = [
       itemCondition: 'https://schema.org/NewCondition',
       url: `${Astro.url.toString()}#comprar`,
       name: `${siteConfig.coffeeProduct.name} ${option.label}`,
+      shippingDetails: {
+        '@type': 'OfferShippingDetails',
+        shippingRate: {
+          '@type': 'MonetaryAmount',
+          value: siteConfig.shippingFee,
+          currency: 'MXN',
+        },
+        shippingDestination: {
+          '@type': 'DefinedRegion',
+          addressCountry: 'MX',
+        },
+        deliveryTime: {
+          '@type': 'ShippingDeliveryTime',
+          transitTime: {
+            '@type': 'QuantitativeValue',
+            minValue: 2,
+            maxValue: 5,
+            unitCode: 'DAY',
+          },
+        },
+      },
     })),
   },
 ];
 ---
 
 <Layout
-  title="Auténtiko Café | Menú, ubicación y café de Chiapas en línea"
-  description={siteConfig.description}
+  title="Auténtiko Café | Cafetería en Guadalajara, menú y café de Chiapas en línea"
+  description="Auténtiko Café es una cafetería en Guadalajara sur, en Los Gavilanes, con menú completo, desayunos, baguettes y café de Chiapas con envío a todo México."
   structuredData={structuredData}
 >
   <header class="site-header">
@@ -95,12 +136,12 @@ const structuredData = [
       <div class="shell">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">Auténtiko desde Los Gavilanes</span>
-            <h1 class="display">La pausa favorita del sur de Guadalajara, con café de Chiapas y una barra hecha con oficio.</h1>
+            <span class="eyebrow">Cafetería en Guadalajara sur</span>
+            <h1 class="display">Auténtiko Café, una pausa bien servida en Los Gavilanes con café de Chiapas y barra hecha con oficio.</h1>
             <p class="lede">
-              Ven por desayuno, por una conversación larga o por tu bolsa para casa. Auténtiko reúne
-              menú completo, hospitalidad cercana y café tostado con criterio para beber aquí o en tu
-              cocina.
+              Si buscas una cafetería en Guadalajara para desayunar, tomar algo bien hecho o llevarte
+              café a casa, aquí encuentras menú completo, hospitalidad cercana y café de Chiapas tostado
+              con criterio.
             </p>
 
             <div class="hero-badges">
@@ -177,7 +218,8 @@ const structuredData = [
           <h2 class="section-title">Aquí se viene por una pausa bien servida.</h2>
           <p class="lede">
             Auténtiko está pensado para esas horas que merecen algo mejor: una taza bien hecha, un
-            desayuno que cae en su punto y una mesa donde la mañana se alarga sin prisa.
+            desayuno que cae en su punto y una mesa donde la mañana se alarga sin prisa en el sur de
+            Guadalajara.
           </p>
 
           <ul class="story-list">
@@ -192,10 +234,11 @@ const structuredData = [
     <section class="section section--menu" id="menu">
       <div class="shell">
         <span class="eyebrow">Menú completo</span>
-        <h2 class="section-title">Barra, cocina y antojos con sello de la casa.</h2>
+        <h2 class="section-title">Menú de cafetería, desayuno y baguettes con sello de la casa.</h2>
         <p class="lede">
           Desde espressos limpios hasta baguettes de masa madre y desayuno de la casa. Todo el menú
-          vigente de Auténtiko Café está aquí para revisar con calma antes de venir o escribirnos.
+          vigente de Auténtiko Café está aquí para revisar con calma antes de venir desde Guadalajara o
+          escribirnos.
         </p>
 
         <div class="menu-grid">
@@ -231,8 +274,8 @@ const structuredData = [
       <div class="shell purchase-grid">
         <article class="purchase-shell">
           <div class="purchase-card purchase-card--highlight">
-            <span class="eyebrow">Para tu casa</span>
-            <h2 class="section-title">Lleva el café de la casa hasta tu cocina.</h2>
+            <span class="eyebrow">Café en línea</span>
+            <h2 class="section-title">Compra café de Chiapas en línea y recíbelo en casa.</h2>
             <p class="lede">{siteConfig.coffeeProduct.description}</p>
           </div>
 
@@ -352,7 +395,7 @@ const structuredData = [
       <div class="shell contact-grid">
         <article class="contact-card">
           <span class="eyebrow">Ubicación</span>
-          <h2 class="section-title">Encuéntranos en Plaza Gavilanes.</h2>
+          <h2 class="section-title">Encuéntranos en Plaza Gavilanes, al sur de Guadalajara.</h2>
           <p class="lede">
             {siteConfig.address}. Es una parada cómoda para desayunar, hacer una pausa bien servida o
             recoger el café que ya apartaste en línea.

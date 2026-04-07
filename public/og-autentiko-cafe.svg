@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Auténtiko Café, cafetería en Guadalajara y café de Chiapas en línea">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6f0e5" />
+      <stop offset="100%" stop-color="#ead8b9" />
+    </linearGradient>
+    <radialGradient id="glow" cx="85%" cy="18%" r="40%">
+      <stop offset="0%" stop-color="#d9ad5b" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#d9ad5b" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect x="40" y="40" width="1120" height="550" rx="32" fill="#f8f4ec" stroke="#d7cab3" />
+  <circle cx="160" cy="150" r="72" fill="#2d6a5b" />
+  <circle cx="160" cy="150" r="38" fill="#f8f4ec" />
+  <circle cx="116" cy="150" r="12" fill="#f8f4ec" />
+  <text x="255" y="146" fill="#221712" font-size="84" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Auténtiko Café</text>
+  <text x="255" y="210" fill="#2d6a5b" font-size="28" font-family="Arial, sans-serif" letter-spacing="4">CAFETERÍA EN GUADALAJARA SUR</text>
+  <text x="95" y="330" fill="#221712" font-size="66" font-family="Georgia, 'Times New Roman', serif" font-weight="700">Café de Chiapas, desayuno</text>
+  <text x="95" y="402" fill="#221712" font-size="66" font-family="Georgia, 'Times New Roman', serif" font-weight="700">y baguettes con sello</text>
+  <text x="95" y="474" fill="#221712" font-size="66" font-family="Georgia, 'Times New Roman', serif" font-weight="700">de la casa.</text>
+  <text x="95" y="548" fill="#5f5147" font-size="30" font-family="Arial, sans-serif">Los Gavilanes, Tlajomulco de Zúñiga · Envíos a todo México · Recoger en tienda</text>
+</svg>
