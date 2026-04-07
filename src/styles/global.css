@@ -1103,6 +1103,10 @@ main {
     max-width: 58%;
   }
 
+  .site-nav .nav-link:last-child {
+    display: none;
+  }
+
   .nav-link {
     padding: 0.42rem 0.58rem;
     font-size: 0.76rem;
