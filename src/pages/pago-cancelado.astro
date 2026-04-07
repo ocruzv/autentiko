@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Pago cancelado | Auténtiko Café"
+  description="El pago fue cancelado. Puedes volver a configurar tu compra en Auténtiko Café."
+>
+  <main class="page-feedback">
+    <article class="feedback-card purchase-card">
+      <span class="eyebrow">Pago cancelado</span>
+      <h1 class="section-title">Tu selección sigue aquí.</h1>
+      <p class="lede">
+        No se procesó el pago. Puedes volver a armar tu compra con calma o escribirnos si necesitas
+        ayuda para completarla.
+      </p>
+      <div class="button-row">
+        <a class="button button-primary" href="/#comprar">Intentar de nuevo</a>
+        <a class="button button-secondary" href="https://wa.me/523317282719" target="_blank" rel="noreferrer">
+          Pedir ayuda por WhatsApp
+        </a>
+      </div>
+    </article>
+  </main>
+</Layout>

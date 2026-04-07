@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../data/site';
+---
+
+<Layout
+  title={`Aviso de privacidad | ${siteConfig.brand}`}
+  description={`Conoce cómo ${siteConfig.brand} trata los datos personales recabados a través de su sitio web y proceso de compra.`}
+>
+  <main class="legal-page">
+    <div class="legal-shell">
+      <a class="legal-back" href="/">Volver al inicio</a>
+
+      <article class="legal-card purchase-card">
+        <span class="eyebrow">Legal</span>
+        <h1 class="section-title">Aviso de privacidad</h1>
+        <p class="lede">
+          En este aviso te explicamos qué datos personales se recaban a través del sitio de
+          {` ${siteConfig.brand}`}, para qué se usan y cómo puedes contactarnos para ejercer tus
+          derechos.
+        </p>
+        <p class="legal-meta">Última actualización: 6 de abril de 2026.</p>
+
+        <div class="legal-stack">
+          <section class="legal-section">
+            <h2>Responsable del tratamiento</h2>
+            <p>
+              {siteConfig.brand} es responsable del tratamiento de los datos personales recabados a
+              través de este sitio.
+            </p>
+            <p>
+              <strong>Domicilio de contacto:</strong> {siteConfig.address}
+            </p>
+            <p>
+              <strong>Medios de contacto:</strong> WhatsApp {siteConfig.whatsappDisplay} e Instagram
+              en <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">@somosautentikocafe</a>.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Datos que podemos recabar</h2>
+            <p>
+              A través del proceso de compra y de los medios de contacto enlazados desde este sitio,
+              pueden recabarse datos como:
+            </p>
+            <ul>
+              <li>Nombre y correo electrónico.</li>
+              <li>Número telefónico.</li>
+              <li>Domicilio de envío cuando el pedido se entrega a domicilio.</li>
+              <li>Datos del pedido, como presentación, molienda y forma de entrega.</li>
+              <li>Información necesaria para facturación, si llegara a solicitarse por separado.</li>
+            </ul>
+            <p>
+              Los datos de pago son procesados principalmente por Stripe dentro de su propia
+              infraestructura y conforme a sus términos y avisos.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Finalidades del tratamiento</h2>
+            <p>Usamos tus datos personales para las siguientes finalidades principales:</p>
+            <ul>
+              <li>Procesar y dar seguimiento a tus pedidos.</li>
+              <li>Coordinar la entrega a domicilio o la recolección en tienda.</li>
+              <li>Atender dudas, aclaraciones, cambios o solicitudes relacionadas con tu compra.</li>
+              <li>Confirmar pagos y mantener un registro básico de la transacción.</li>
+            </ul>
+            <p>
+              De forma accesoria, podemos usar los datos de contacto para responder mensajes enviados
+              por WhatsApp o redes sociales respecto de nuestros productos y servicios.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Transferencias y terceros</h2>
+            <p>
+              Para operar este sitio y procesar compras, utilizamos servicios de terceros. Entre ellos
+              pueden intervenir:
+            </p>
+            <ul>
+              <li>Stripe, para la gestión y procesamiento del pago.</li>
+              <li>Google Maps, para mostrar la ubicación de la cafetería.</li>
+              <li>WhatsApp e Instagram, cuando el usuario decide contactarnos mediante esos enlaces.</li>
+            </ul>
+            <p>
+              No compartimos tus datos con terceros ajenos a la operación del pedido, salvo cuando sea
+              necesario para cumplir una obligación legal o una autoridad competente lo requiera.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Derechos ARCO y revocación</h2>
+            <p>
+              Puedes solicitar el acceso, rectificación, cancelación u oposición respecto de tus datos
+              personales, así como revocar el consentimiento que hayas otorgado, escribiéndonos por
+              WhatsApp o mediante los medios de contacto publicados en este sitio.
+            </p>
+            <p>
+              Para atender la solicitud podremos pedirte información razonable para confirmar tu
+              identidad y ubicar el pedido o registro correspondiente.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Cambios al aviso</h2>
+            <p>
+              Este aviso puede actualizarse cuando cambien nuestros procesos, medios de pago,
+              operación o requerimientos legales. Cualquier cambio relevante será publicado en esta
+              misma página.
+            </p>
+          </section>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>

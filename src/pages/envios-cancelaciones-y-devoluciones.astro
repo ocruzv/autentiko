@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { currencyFormatter, siteConfig } from '../data/site';
+---
+
+<Layout
+  title={`Envíos, cancelaciones y devoluciones | ${siteConfig.brand}`}
+  description={`Consulta las políticas de envío, recolección en tienda, cancelaciones y devoluciones de ${siteConfig.brand}.`}
+>
+  <main class="legal-page">
+    <div class="legal-shell">
+      <a class="legal-back" href="/">Volver al inicio</a>
+
+      <article class="legal-card purchase-card">
+        <span class="eyebrow">Legal</span>
+        <h1 class="section-title">Envíos, cancelaciones y devoluciones</h1>
+        <p class="lede">
+          Esta política explica cómo operan los pedidos con entrega a domicilio o para recoger en
+          tienda, así como las reglas aplicables a cancelaciones y aclaraciones.
+        </p>
+        <p class="legal-meta">Última actualización: 6 de abril de 2026.</p>
+
+        <div class="legal-stack">
+          <section class="legal-section">
+            <h2>Opciones de entrega</h2>
+            <ul>
+              <li>
+                <strong>Envío a todo México:</strong> con tarifa fija de
+                {` ${currencyFormatter.format(siteConfig.shippingFee)} MXN`}.
+              </li>
+              <li>
+                <strong>Recoger en tienda:</strong> disponible sin costo adicional en
+                {` ${siteConfig.address}`}.
+              </li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2>Tiempos de preparación y entrega</h2>
+            <p>
+              Los pedidos se preparan dentro de nuestros tiempos operativos normales. Para envíos
+              nacionales, el tiempo estimado puede variar según destino, paquetería y temporada.
+            </p>
+            <p>
+              En pedidos para recoger en tienda, el cliente deberá acudir dentro del horario vigente de
+              la cafetería una vez que el pedido esté listo o dentro del tiempo razonable de atención
+              que se indique por nuestros canales.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Responsabilidad del cliente</h2>
+            <p>
+              El cliente debe revisar cuidadosamente los datos del pedido antes de pagar, incluyendo:
+            </p>
+            <ul>
+              <li>Presentación seleccionada.</li>
+              <li>Molienda elegida.</li>
+              <li>Forma de entrega.</li>
+              <li>Dirección de envío, cuando aplique.</li>
+            </ul>
+          </section>
+
+          <section class="legal-section">
+            <h2>Cancelaciones</h2>
+            <p>
+              Si deseas cancelar un pedido, te pedimos contactarnos lo antes posible por WhatsApp. La
+              cancelación solo podrá realizarse si el pedido aún no ha sido preparado, despachado o
+              entregado al servicio de envío.
+            </p>
+            <p>
+              En pedidos ya preparados, tostados, despachados o listos para entrega, la cancelación
+              podrá no proceder por tratarse de productos perecederos o preparados conforme a la
+              selección del cliente.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Devoluciones y aclaraciones</h2>
+            <p>
+              Si tu pedido llega incorrecto, incompleto o en malas condiciones atribuibles a la
+              preparación o empaque, escríbenos por WhatsApp con tu referencia de compra y evidencia
+              razonable del problema.
+            </p>
+            <p>
+              Revisaremos cada caso para determinar, según corresponda, reposición del producto,
+              ajuste, bonificación o solución equivalente.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Pedidos no entregados o incidencias de envío</h2>
+            <p>
+              Cuando exista una incidencia imputable a datos incorrectos proporcionados por el cliente,
+              la reexpedición o costos adicionales podrán correr por cuenta del propio cliente.
+            </p>
+            <p>
+              Si la incidencia se debe a un error atribuible a {siteConfig.brand}, buscaremos una
+              solución razonable conforme al caso concreto.
+            </p>
+          </section>
+
+          <section class="legal-section">
+            <h2>Contacto</h2>
+            <p>
+              Para cualquier aclaración relacionada con envíos, cancelaciones o devoluciones, puedes
+              escribirnos por WhatsApp al {siteConfig.whatsappDisplay}.
+            </p>
+          </section>
+        </div>
+      </article>
+    </div>
+  </main>
+</Layout>
