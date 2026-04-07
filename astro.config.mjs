@@ -8,4 +8,16 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  security: {
+    allowedDomains: [
+      {
+        protocol: 'https',
+        hostname: 'autentiko.com.mx',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.autentiko.com.mx',
+      },
+    ],
+  },
 });
