@@ -246,12 +246,12 @@ export const siteConfig: SiteConfig = {
     name: 'Café de Chiapas',
     subtitle: 'Tostado por maestro tostador para servir en casa con el sello de Auténtiko.',
     description:
-      'Grano de origen chiapaneco con un tueste equilibrado para espresso, moka, prensa o filtro. Disponible en grano o molido, con envío nacional o para recoger en tienda.',
+      'Grano chiapaneco con un tueste equilibrado para espresso, moka, prensa o filtro. Puedes pedirlo en grano o molido y recibirlo en casa o pasar por él a la tienda.',
     benefits: [
       'Origen chiapaneco seleccionado para una taza limpia y amable.',
-      'Tueste fresco con perfil equilibrado para beber todos los días.',
+      'Tueste fresco con perfil equilibrado para disfrutarlo todos los días.',
       'Disponible en grano o molido, en formatos pensados para casa.',
-      'Entrega nacional o recolección en sucursal según te acomode.',
+      'Envío a todo México o recogida en tienda, como mejor te acomode.',
     ],
     weightOptions,
     grindOptions,

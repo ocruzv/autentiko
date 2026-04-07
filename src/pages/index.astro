@@ -107,7 +107,7 @@ const structuredData = [
 
 <Layout
   title="Auténtiko Café | Cafetería en Guadalajara, menú y café de Chiapas en línea"
-  description="Auténtiko Café es una cafetería en Guadalajara sur, en Los Gavilanes, con menú completo, desayunos, baguettes y café de Chiapas con envío a todo México."
+  description="Auténtiko Café es una cafetería en el sur de Guadalajara, en Los Gavilanes, con desayunos, baguettes, buen café y café de Chiapas para llevar a casa o pedir en línea."
   structuredData={structuredData}
 >
   <header class="site-header">
@@ -122,7 +122,10 @@ const structuredData = [
 
       <nav class="site-nav" aria-label="Navegación principal">
         <a class="nav-link" href="#menu">Menú</a>
-        <a class="nav-link" href="#comprar">Café en línea</a>
+        <a class="nav-link" href="#comprar">
+          <span class="nav-label nav-label--desktop">Café en línea</span>
+          <span class="nav-label nav-label--mobile">Pedir café</span>
+        </a>
         <a class="nav-link" href="#ubicacion">Ubicación</a>
         <a class="nav-link" href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
           Instagram
@@ -136,12 +139,12 @@ const structuredData = [
       <div class="shell">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="eyebrow">Cafetería en Guadalajara sur</span>
-            <h1 class="display">Auténtiko Café, una pausa bien servida en Los Gavilanes con café de Chiapas y barra hecha con oficio.</h1>
+            <span class="eyebrow">Cafetería en el sur de Guadalajara</span>
+            <h1 class="display">Auténtiko Café, una pausa bien servida en Los Gavilanes con café de Chiapas y algo rico para quedarse un rato.</h1>
             <p class="lede">
-              Si buscas una cafetería en Guadalajara para desayunar, tomar algo bien hecho o llevarte
-              café a casa, aquí encuentras menú completo, hospitalidad cercana y café de Chiapas tostado
-              con criterio.
+              Si andas por el sur de Guadalajara y se te antoja desayunar, tomar algo bien hecho o
+              llevarte café a casa, aquí te espera una barra cuidada, cocina de la casa y café de
+              Chiapas tostado con cariño.
             </p>
 
             <div class="hero-badges">
@@ -205,13 +208,13 @@ const structuredData = [
           <h2 class="section-title">Una barra cercana, con oficio de verdad.</h2>
           <p class="lede">
             {siteConfig.brand} nace con el espíritu de una casa de café honesta: producto bien hecho,
-            sabores reconocibles y una atención que se siente cercana desde la primera taza.
+            sabores que reconfortan y una atención que se siente cercana desde la primera taza.
           </p>
 
           <ul class="story-list">
             <li>Grano chiapaneco tostado por maestro tostador para una taza limpia y memorable.</li>
-            <li>Recetas pensadas para el gusto diario: espresso, lattes, frappés y cocina de la casa.</li>
-            <li>Un punto de encuentro al sur de Guadalajara, con café para llevar o recibir en casa.</li>
+            <li>Espresso, lattes, frappés y cocina de la casa pensados para volverse parte de tu rutina.</li>
+            <li>Un rincón al sur de Guadalajara para pasar por tu café, quedarte un rato o llevarlo a casa.</li>
           </ul>
         </article>
 
@@ -227,7 +230,7 @@ const structuredData = [
           <ul class="story-list">
             <li>Bebidas calientes, frías y frappés preparadas para volver una y otra vez.</li>
             <li>Baguettes de masa madre natural y desayuno de la casa para acompañar la barra.</li>
-            <li>Café de Chiapas disponible también para llevar a tu cocina, en grano o molido.</li>
+            <li>Café de Chiapas también para llevar a tu cocina, en grano o molido.</li>
           </ul>
         </article>
       </div>
@@ -236,10 +239,10 @@ const structuredData = [
     <section class="section section--menu" id="menu">
       <div class="shell">
         <span class="eyebrow">Menú completo</span>
-        <h2 class="section-title">Menú de cafetería, desayuno y baguettes con sello de la casa.</h2>
+        <h2 class="section-title">Un menú para volver por el café, el desayuno y los antojos de la casa.</h2>
         <p class="lede">
-          Desde espressos limpios hasta baguettes de masa madre y desayuno de la casa. Todo el menú
-          vigente de Auténtiko Café está aquí para revisar con calma antes de venir desde Guadalajara o
+          Desde espressos bien servidos hasta baguettes de masa madre y desayunos hechos al momento.
+          Aquí puedes ver con calma todo lo que sale de la barra y la cocina antes de venir o
           escribirnos.
         </p>
 
@@ -266,8 +269,8 @@ const structuredData = [
         </div>
 
         <p class="menu-note">
-          Pan de masa madre natural, chipotle de la casa y café servido durante toda la jornada. Si
-          quieres confirmar extras, disponibilidad o hacer un pedido especial, escríbenos por WhatsApp.
+          Pan de masa madre natural, chipotle de la casa y café sirviéndose durante toda la jornada.
+          Si quieres confirmar extras o pedir algo especial, escríbenos por WhatsApp.
         </p>
       </div>
     </section>
@@ -277,7 +280,7 @@ const structuredData = [
         <article class="purchase-shell">
           <div class="purchase-card purchase-card--highlight">
             <span class="eyebrow">Café en línea</span>
-            <h2 class="section-title">Compra café de Chiapas en línea y recíbelo en casa.</h2>
+            <h2 class="section-title">Llévate el café de Auténtiko a casa.</h2>
             <p class="lede">{siteConfig.coffeeProduct.description}</p>
           </div>
 
@@ -295,8 +298,8 @@ const structuredData = [
           <span class="eyebrow">Pedido</span>
           <h3>Arma tu pedido</h3>
           <p>
-            Elige presentación, molienda y forma de entrega. El pago se hace en una pantalla segura y
-            solo solicita dirección de envío cuando corresponde.
+            Elige el tamaño, la molienda y cómo prefieres recibirlo. Si eliges envío, la dirección se
+            pide al momento de pagar.
           </p>
 
           <form class="checkout-panel" method="POST" action="/api/checkout" data-coffee-form>
@@ -463,7 +466,7 @@ const structuredData = [
           <a href="/envios-cancelaciones-y-devoluciones">Envíos, cancelaciones y devoluciones</a>
         </nav>
       </div>
-      <p>Tlajomulco, Jalisco · Envíos a todo México · Recoger en tienda disponible</p>
+      <p>Tlajomulco, Jalisco · Envíos a todo México · También puedes recoger en tienda</p>
     </div>
   </footer>
 

@@ -268,6 +268,10 @@ main {
     color var(--transition);
 }
 
+.nav-label--mobile {
+  display: none;
+}
+
 .nav-link:hover {
   background: color-mix(in oklab, var(--surface-strong) 74%, white);
   color: var(--ink-strong);
@@ -1110,6 +1114,14 @@ main {
   .nav-link {
     padding: 0.42rem 0.58rem;
     font-size: 0.76rem;
+  }
+
+  .nav-label--desktop {
+    display: none;
+  }
+
+  .nav-label--mobile {
+    display: inline;
   }
 
   .section {
