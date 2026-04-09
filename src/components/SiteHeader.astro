@@ -1,0 +1,50 @@
+---
+type Props = {
+  currentPath?: string;
+};
+
+const { currentPath = '/' } = Astro.props;
+
+type NavItem = {
+  href: string;
+  label: string;
+  mobileLabel?: string;
+};
+
+const navItems: NavItem[] = [
+  { href: '/', label: 'Inicio' },
+  { href: '/menu', label: 'Menú' },
+  { href: '/cafe-en-linea', label: 'Café en línea', mobileLabel: 'Pedir café' },
+  { href: '/ubicacion', label: 'Ubicación' },
+];
+---
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a class="brand-lockup" href="/" aria-label="Ir al inicio de Auténtiko Café">
+      <img src="/brand/autentiko-logo.svg" alt="" width="96" height="96" />
+      <div>
+        <strong>Auténtiko Café</strong>
+        <span>Tlajomulco, Jalisco</span>
+      </div>
+    </a>
+
+    <nav class="site-nav" aria-label="Navegación principal">
+      {navItems.map((item) => (
+        <a class="nav-link" href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
+          {item.mobileLabel ? (
+            <>
+              <span class="nav-label nav-label--desktop">{item.label}</span>
+              <span class="nav-label nav-label--mobile">{item.mobileLabel}</span>
+            </>
+          ) : (
+            item.label
+          )}
+        </a>
+      ))}
+      <a class="nav-link" href="https://www.instagram.com/somosautentikocafe/" target="_blank" rel="noreferrer">
+        Instagram
+      </a>
+    </nav>
+  </div>
+</header>

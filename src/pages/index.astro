@@ -1,264 +1,150 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import { currencyFormatter, siteConfig } from '../data/site';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteConfig } from '../data/site';
 import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
-import huevosAutentikosImage from '../assets/products/huevos-autentikos.jpeg';
-import huevosAutentikosAltImage from '../assets/products/huevos-autentikos-2.jpeg';
+import bebidaHeroImage from '../assets/products/bebida-2.jpeg';
+import flatWhiteImage from '../assets/products/flat-white.jpeg';
 
-const basePrice = siteConfig.coffeeProduct.weightOptions[0]?.price ?? 0;
-const shippingFee = siteConfig.shippingFee;
-const showcaseItems = [
-  {
-    image: chilaquilesImage,
-    alt: 'Chilaquiles servidos en Auténtiko Café',
-    title: 'Chilaquiles de la casa',
-    detail: 'Para llegar con hambre y quedarse con ganas de volver.',
-    featured: true,
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  '@id': `${Astro.url.origin}/#cafeteria`,
+  name: siteConfig.brand,
+  image: '/brand/autentiko-logo.png',
+  description: siteConfig.description,
+  servesCuisine: ['Coffee', 'Breakfast', 'Sandwiches'],
+  telephone: siteConfig.whatsappDisplay,
+  priceRange: '$$',
+  hasMap: siteConfig.mapsUrl,
+  areaServed: ['Guadalajara', 'Tlajomulco de Zúñiga', 'México'],
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 20.5694,
+    longitude: -103.4408,
   },
-  {
-    image: huevosAutentikosImage,
-    alt: 'Huevos auténtikos servidos en Auténtiko Café',
-    title: 'Huevos auténtikos',
-    detail: 'Desayuno hecho al momento, con ese punto casero que reconforta.',
-    featured: false,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plaza Gavilanes, Local 14, Los Gavilanes',
+    addressLocality: 'Tlajomulco de Zúñiga',
+    addressRegion: 'Jalisco',
+    postalCode: '45645',
+    addressCountry: 'MX',
   },
-  {
-    image: huevosAutentikosAltImage,
-    alt: 'Plato de desayuno servido en Auténtiko Café',
-    title: 'Mañanas con calma',
-    detail: 'Platos que acompañan bien una taza servida sin prisa.',
-    featured: false,
-  },
-] as const;
-
-const structuredData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'CafeOrCoffeeShop',
-    '@id': `${Astro.url.origin}/#cafeteria`,
-    name: siteConfig.brand,
-    image: '/brand/autentiko-logo.png',
-    description: siteConfig.description,
-    servesCuisine: ['Coffee', 'Breakfast', 'Sandwiches'],
-    telephone: siteConfig.whatsappDisplay,
-    priceRange: '$$',
-    hasMap: siteConfig.mapsUrl,
-    areaServed: ['Guadalajara', 'Tlajomulco de Zúñiga', 'México'],
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 20.5694,
-      longitude: -103.4408,
-    },
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Plaza Gavilanes, Local 14, Los Gavilanes',
-      addressLocality: 'Tlajomulco de Zúñiga',
-      addressRegion: 'Jalisco',
-      postalCode: '45645',
-      addressCountry: 'MX',
-    },
-    url: Astro.url.toString(),
-    sameAs: [siteConfig.instagramUrl, siteConfig.mapsUrl],
-    openingHoursSpecification: [
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        opens: '07:00',
-        closes: '19:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Saturday',
-        opens: '08:00',
-        closes: '14:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: 'Sunday',
-        opens: '09:00',
-        closes: '13:00',
-      },
-    ],
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    '@id': `${Astro.url.origin}/#cafe-chiapas`,
-    name: `${siteConfig.brand} ${siteConfig.coffeeProduct.name}`,
-    description: siteConfig.coffeeProduct.description,
-    brand: {
-      '@type': 'Brand',
-      name: siteConfig.brand,
-    },
-    seller: {
-      '@type': 'CafeOrCoffeeShop',
-      name: siteConfig.brand,
-      url: Astro.url.toString(),
-    },
-    areaServed: 'MX',
-    category: 'Café tostado',
-    offers: siteConfig.coffeeProduct.weightOptions.map((option) => ({
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceCurrency: 'MXN',
-      price: option.price,
-      itemCondition: 'https://schema.org/NewCondition',
-      url: `${Astro.url.toString()}#comprar`,
-      name: `${siteConfig.coffeeProduct.name} ${option.label}`,
-      shippingDetails: {
-        '@type': 'OfferShippingDetails',
-        shippingRate: {
-          '@type': 'MonetaryAmount',
-          value: siteConfig.shippingFee,
-          currency: 'MXN',
-        },
-        shippingDestination: {
-          '@type': 'DefinedRegion',
-          addressCountry: 'MX',
-        },
-        deliveryTime: {
-          '@type': 'ShippingDeliveryTime',
-          transitTime: {
-            '@type': 'QuantitativeValue',
-            minValue: 2,
-            maxValue: 5,
-            unitCode: 'DAY',
-          },
-        },
-      },
-    })),
-  },
-];
+  url: Astro.url.toString(),
+  sameAs: [siteConfig.instagramUrl, siteConfig.mapsUrl],
+};
 ---
 
 <Layout
-  title="Auténtiko Café | Cafetería en Guadalajara, menú y café de Chiapas en línea"
-  description="Auténtiko Café es una cafetería en el sur de Guadalajara, en Los Gavilanes, con desayunos, baguettes, buen café y café de Chiapas para llevar a casa o pedir en línea."
+  title="Auténtiko Café | Cafetería en el sur de Guadalajara"
+  description="Auténtiko Café es una cafetería en Los Gavilanes, al sur de Guadalajara, con barra cuidada, desayunos de la casa y café de Chiapas para llevar o pedir en línea."
   structuredData={structuredData}
 >
-  <header class="site-header">
-    <div class="shell site-header__inner">
-      <a class="brand-lockup" href="#inicio" aria-label="Ir al inicio de Auténtiko Café">
-        <img src="/brand/autentiko-logo.svg" alt="" width="96" height="96" />
-        <div>
-          <strong>{siteConfig.brand}</strong>
-          <span>Tlajomulco, Jalisco</span>
-        </div>
-      </a>
+  <SiteHeader currentPath="/" />
 
-      <nav class="site-nav" aria-label="Navegación principal">
-        <a class="nav-link" href="#menu">Menú</a>
-        <a class="nav-link" href="#comprar">
-          <span class="nav-label nav-label--desktop">Café en línea</span>
-          <span class="nav-label nav-label--mobile">Pedir café</span>
-        </a>
-        <a class="nav-link" href="#ubicacion">Ubicación</a>
-        <a class="nav-link" href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">
-          Instagram
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="inicio">
+  <main>
     <section class="section hero">
-      <div class="shell">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <span class="eyebrow">Cafetería en el sur de Guadalajara</span>
-            <h1 class="display">Auténtiko Café, una pausa bien servida en Los Gavilanes con café de Chiapas y algo rico para quedarse un rato.</h1>
-            <p class="lede">
-              Si andas por el sur de Guadalajara y se te antoja desayunar, tomar algo bien hecho o
-              llevarte café a casa, aquí te espera una barra cuidada, cocina de la casa y café de
-              Chiapas tostado con cariño.
-            </p>
+      <div class="shell hero-grid hero-grid--home">
+        <div class="hero-copy">
+          <span class="eyebrow">Cafetería en el sur de Guadalajara</span>
+          <h1 class="display">Café bien servido, desayunos con antojo y una pausa que sí se antoja repetir.</h1>
+          <p class="lede">
+            En Los Gavilanes está Auténtiko: una barra cercana con café de Chiapas, cocina de la casa
+            y ese ritmo tranquilo que dan ganas de alargar un poco más.
+          </p>
 
-            <div class="hero-badges">
-              <span class="pill"><strong>Recoger en tienda</strong> sin costo</span>
-              <span class="pill">
-                <strong>Envío a todo México</strong> {currencyFormatter.format(siteConfig.shippingFee)}
-              </span>
-              <span class="pill"><strong>Plaza Gavilanes</strong> Local 14</span>
-            </div>
-
-            <div class="button-row">
-              <a class="button button-primary" href="#comprar">Comprar café</a>
-              <a class="button button-secondary" href="#menu">Explorar menú</a>
-              <a class="button button-text" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
-                Pedir por WhatsApp
-              </a>
-            </div>
-
+          <div class="hero-badges">
+            <span class="pill"><strong>Plaza Gavilanes</strong> Local 14</span>
+            <span class="pill"><strong>Recoger en tienda</strong> sin costo</span>
+            <span class="pill"><strong>Envío a todo México</strong> para el café en línea</span>
           </div>
 
-          <aside class="hero-panel" aria-label="Resumen del concepto">
-            <div class="hero-panel__top">
-              <div class="hero-panel__intro">
-                <strong>{siteConfig.shortBrand}</strong>
-                <p>{siteConfig.tagline}</p>
-              </div>
-
-              <div class="hero-panel__mark" aria-hidden="true">
-                <img src="/brand/autentiko-logo.svg" alt="" width="360" height="360" />
-              </div>
-            </div>
-
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <strong>Café de Chiapas</strong>
-                <span>Tostado con perfil pensado para casa, barra y regalo.</span>
-              </div>
-              <div class="hero-stat">
-                <strong>Barra + cocina</strong>
-                <span>Bebidas calientes, frías, frappés, baguettes y desayuno.</span>
-              </div>
-              <div class="hero-stat hero-stat--location">
-                <strong>Sur de Guadalajara</strong>
-                <span>Plaza Gavilanes, local 14, Los Gavilanes.</span>
-              </div>
-            </div>
-
-            <p class="hero-panel__note">
-              Un lugar para volver entre semana, llevar a alguien el sábado y seguir tomando el mismo
-              café en casa.
-            </p>
-          </aside>
+          <div class="button-row">
+            <a class="button button-primary" href="/menu">Ver menú</a>
+            <a class="button button-secondary" href="/cafe-en-linea">Comprar café</a>
+            <a class="button button-text" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
+              Pedir por WhatsApp
+            </a>
+          </div>
         </div>
+
+        <aside class="hero-panel" aria-label="Rutas principales del sitio">
+          <div class="hero-panel__top">
+            <div class="hero-panel__intro">
+              <strong>{siteConfig.shortBrand}</strong>
+              <p>{siteConfig.tagline}</p>
+            </div>
+
+            <div class="hero-panel__mark" aria-hidden="true">
+              <img src="/brand/autentiko-logo.svg" alt="" width="360" height="360" />
+            </div>
+          </div>
+
+          <div class="route-grid">
+            <a class="route-card" href="/menu">
+              <strong>Menú completo</strong>
+              <span>Bebidas calientes, frías, frappés, baguettes y desayunos.</span>
+            </a>
+            <a class="route-card" href="/cafe-en-linea">
+              <strong>Café en línea</strong>
+              <span>Compra 500 g o 1 kg, en grano o molido, con envío o pickup.</span>
+            </a>
+            <a class="route-card" href="/ubicacion">
+              <strong>Ubicación</strong>
+              <span>Horarios, mapa, contacto y todo para caerle sin rodeos.</span>
+            </a>
+          </div>
+
+          <p class="hero-panel__note">
+            Un lugar para desayunar entre semana, invitar a alguien el sábado o seguir tomando el
+            mismo café en casa.
+          </p>
+        </aside>
       </div>
     </section>
 
     <section class="section" id="historia">
       <div class="shell story-grid">
         <article class="story-card story-card--accent">
-          <span class="eyebrow">Origen</span>
+          <span class="eyebrow">La casa</span>
           <h2 class="section-title">Una barra cercana, con oficio de verdad.</h2>
           <p class="lede">
-            {siteConfig.brand} nace con el espíritu de una casa de café honesta: producto bien hecho,
-            sabores que reconfortan y una atención que se siente cercana desde la primera taza.
+            {siteConfig.brand} nace con el gusto por servir bien: producto honesto, sabores que
+            reconfortan y una atención que se siente cercana desde la primera taza.
           </p>
 
           <ul class="story-list">
             <li>Grano chiapaneco tostado por maestro tostador para una taza limpia y memorable.</li>
-            <li>Espresso, lattes, frappés y cocina de la casa pensados para volverse parte de tu rutina.</li>
+            <li>Recetas pensadas para volverse parte de la rutina: espresso, lattes, frappés y cocina de la casa.</li>
             <li>Un rincón al sur de Guadalajara para pasar por tu café, quedarte un rato o llevarlo a casa.</li>
           </ul>
         </article>
 
         <article class="story-card">
-          <span class="eyebrow">La visita</span>
-          <h2 class="section-title">Aquí se viene por una pausa bien servida.</h2>
+          <span class="eyebrow">Lo que pasa aquí</span>
+          <h2 class="section-title">Entre la barra y la cocina, todo invita a volver.</h2>
           <p class="lede">
-            Auténtiko está pensado para esas horas que merecen algo mejor: una taza bien hecha, un
-            desayuno que cae en su punto y una mesa donde la mañana se alarga sin prisa en el sur de
-            Guadalajara.
+            Auténtiko está hecho para esas mañanas y tardes que merecen algo mejor: una taza bien
+            hecha, un desayuno con antojo y una mesa donde la conversación se queda un poco más.
           </p>
 
-          <ul class="story-list">
-            <li>Bebidas calientes, frías y frappés preparadas para volver una y otra vez.</li>
-            <li>Baguettes de masa madre natural y desayuno de la casa para acompañar la barra.</li>
-            <li>Café de Chiapas también para llevar a tu cocina, en grano o molido.</li>
-          </ul>
+          <div class="mini-links">
+            <a class="mini-link" href="/menu">
+              <strong>Ver el menú</strong>
+              <span>Chilaquiles, huevos, baguettes y bebidas de la casa.</span>
+            </a>
+            <a class="mini-link" href="/ubicacion">
+              <strong>Planear la visita</strong>
+              <span>Horarios, mapa y contacto directo por WhatsApp.</span>
+            </a>
+            <a class="mini-link" href="/cafe-en-linea">
+              <strong>Llevar el café a casa</strong>
+              <span>Compra en línea con envío nacional o recogida en tienda.</span>
+            </a>
+          </div>
         </article>
       </div>
     </section>
@@ -266,301 +152,62 @@ const structuredData = [
     <section class="section section--showcase" aria-labelledby="de-la-cocina">
       <div class="shell showcase-grid">
         <article class="showcase-copy">
-          <span class="eyebrow">De la cocina</span>
-          <h2 class="section-title" id="de-la-cocina">Desayunos que se antojan antes de llegar.</h2>
+          <span class="eyebrow">De la casa</span>
+          <h2 class="section-title" id="de-la-cocina">Lo que sale de la barra y la cocina ya se ve como sabe.</h2>
           <p class="lede">
-            Ya empezamos a sumar fotos reales de la casa para que se vea mejor lo que pasa en la barra
-            y la cocina: chilaquiles, huevos y platos que piden café al lado.
+            El menú ya no vive escondido en una sola página. Ahora hay espacio para ver mejor los
+            desayunos, las bebidas y el café que puedes pedir para casa.
           </p>
-          <a class="button button-secondary" href="#menu">Ver desayunos en el menú</a>
+          <div class="button-row">
+            <a class="button button-primary" href="/menu">Explorar el menú</a>
+            <a class="button button-secondary" href="/cafe-en-linea">Ir a café en línea</a>
+          </div>
         </article>
 
         <div class="showcase-gallery">
-          {showcaseItems.map((item) => (
-            <figure class:list={['showcase-card', item.featured && 'showcase-card--featured']}>
-              <Image
-                src={item.image}
-                alt={item.alt}
-                widths={[480, 720, 960]}
-                sizes={item.featured ? '(max-width: 60rem) 100vw, 42vw' : '(max-width: 60rem) 100vw, 21vw'}
-                loading="lazy"
-              />
-              <figcaption class="showcase-card__body">
-                <strong>{item.title}</strong>
-                <span>{item.detail}</span>
-              </figcaption>
-            </figure>
-          ))}
+          <figure class="showcase-card showcase-card--featured">
+            <Image src={chilaquilesImage} alt="Chilaquiles servidos en Auténtiko Café" widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 42vw" />
+            <figcaption class="showcase-card__body">
+              <strong>Chilaquiles de la casa</strong>
+              <span>Para llegar con hambre y quedarse con ganas de volver.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="showcase-card">
+            <Image src={bebidaHeroImage} alt="Bebida servida en la barra de Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 100vw, 21vw" />
+            <figcaption class="showcase-card__body">
+              <strong>Barra fresca</strong>
+              <span>Bebidas que saben a pausa bien servida.</span>
+            </figcaption>
+          </figure>
+
+          <figure class="showcase-card">
+            <Image src={flatWhiteImage} alt="Flat white servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 100vw, 21vw" />
+            <figcaption class="showcase-card__body">
+              <strong>Café diario</strong>
+              <span>Tazas cuidadas para volver una y otra vez.</span>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <section class="section section--menu" id="menu">
-      <div class="shell">
-        <span class="eyebrow">Menú completo</span>
-        <h2 class="section-title">Un menú para volver por el café, el desayuno y los antojos de la casa.</h2>
-        <p class="lede">
-          Desde espressos bien servidos hasta baguettes de masa madre y desayunos hechos al momento.
-          Aquí puedes ver con calma todo lo que sale de la barra y la cocina antes de venir o
-          escribirnos.
-        </p>
-
-        <div class="menu-grid">
-          {siteConfig.menuSections.map((section) => (
-            <article class="menu-card" id={section.id}>
-              <span class="eyebrow">{section.eyebrow}</span>
-              <h3>{section.title}</h3>
-              <p>{section.note}</p>
-
-              <ul class={section.id === 'baguettes' || section.id === 'desayunos' ? 'menu-food-list' : 'menu-list'}>
-                {section.items.map((item) => (
-                  <li>
-                    <div class="menu-item">
-                      <strong>{item.name}</strong>
-                      <span>{item.price}</span>
-                    </div>
-                    {item.description && <p class="menu-item-desc">{item.description}</p>}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+    <section class="section section--contact">
+      <div class="shell visit-strip">
+        <div>
+          <span class="eyebrow">Visítanos</span>
+          <h2 class="section-title">Todo lo importante para caerle a Auténtiko, sin buscar de más.</h2>
         </div>
 
-        <p class="menu-note">
-          Pan de masa madre natural, chipotle de la casa y café sirviéndose durante toda la jornada.
-          Si quieres confirmar extras o pedir algo especial, escríbenos por WhatsApp.
-        </p>
-      </div>
-    </section>
-
-    <section class="section section--purchase" id="comprar">
-      <div class="shell purchase-grid">
-        <article class="purchase-shell">
-          <div class="purchase-card purchase-card--highlight">
-            <span class="eyebrow">Café en línea</span>
-            <h2 class="section-title">Llévate el café de Auténtiko a casa.</h2>
-            <p class="lede">{siteConfig.coffeeProduct.description}</p>
-          </div>
-
-          <div class="purchase-card">
-            <h3>{siteConfig.coffeeProduct.name}</h3>
-            <p>{siteConfig.coffeeProduct.subtitle}</p>
-            <ul class="benefit-list">
-              {siteConfig.coffeeProduct.benefits.map((benefit) => <li>{benefit}</li>)}
-            </ul>
-          </div>
-
-        </article>
-
-        <article class="selection-card">
-          <span class="eyebrow">Pedido</span>
-          <h3>Arma tu pedido</h3>
-          <p>
-            Elige el tamaño, la molienda y cómo prefieres recibirlo. Si eliges envío, la dirección se
-            pide al momento de pagar.
-          </p>
-
-          <form class="checkout-panel" method="POST" action="/api/checkout" data-coffee-form>
-            <fieldset class="choice-group">
-              <legend><strong>Peso</strong></legend>
-              {siteConfig.coffeeProduct.weightOptions.map((option, index) => (
-                <div class="choice-card">
-                  <input
-                    type="radio"
-                    id={`weight-${option.value}`}
-                    name="weight"
-                    value={option.value}
-                    checked={index === 0}
-                    data-price={option.price}
-                  />
-                  <label for={`weight-${option.value}`}>
-                    <strong>{option.label} · {currencyFormatter.format(option.price)}</strong>
-                    <span>{option.detail}</span>
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-
-            <fieldset class="choice-group">
-              <legend><strong>Molienda</strong></legend>
-              {siteConfig.coffeeProduct.grindOptions.map((option, index) => (
-                <div class="choice-card">
-                  <input
-                    type="radio"
-                    id={`grind-${option.value}`}
-                    name="grind"
-                    value={option.value}
-                    checked={index === 0}
-                  />
-                  <label for={`grind-${option.value}`}>
-                    <strong>{option.label}</strong>
-                    <span>{option.detail}</span>
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-
-            <fieldset class="choice-group">
-              <legend><strong>Entrega</strong></legend>
-              {siteConfig.coffeeProduct.fulfillmentOptions.map((option, index) => (
-                <div class="choice-card">
-                  <input
-                    type="radio"
-                    id={`fulfillment-${option.value}`}
-                    name="fulfillment"
-                    value={option.value}
-                    checked={index === 0}
-                    data-fee={option.fee}
-                  />
-                  <label for={`fulfillment-${option.value}`}>
-                    <strong>
-                      {option.label}
-                      {option.fee > 0 && ` · ${currencyFormatter.format(option.fee)}`}
-                    </strong>
-                    <span>{option.detail}</span>
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-
-            <div class="summary-box" aria-live="polite">
-              <div class="summary-line">
-                <span>Producto</span>
-                <strong data-summary-product>{currencyFormatter.format(basePrice)}</strong>
-              </div>
-              <div class="summary-line">
-                <span>Entrega</span>
-                <strong data-summary-delivery>{currencyFormatter.format(shippingFee)}</strong>
-              </div>
-              <div class="summary-line summary-total">
-                <span>Total estimado</span>
-                <strong data-summary-total>{currencyFormatter.format(basePrice + shippingFee)}</strong>
-              </div>
-            </div>
-
-            <p class="checkout-note">
-              Si eliges envío, capturas tu dirección al pagar. Si prefieres recogerlo en tienda, solo
-              cubres el café y pasas por él cuando te quede bien.
-            </p>
-
-            <div class="button-row">
-              <button class="button button-primary" type="submit">Ir al pago</button>
-              <a class="button button-secondary" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
-                Resolver dudas por WhatsApp
-              </a>
-            </div>
-          </form>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section--contact" id="ubicacion">
-      <div class="shell contact-grid">
-        <article class="contact-card">
-          <span class="eyebrow">Ubicación</span>
-          <h2 class="section-title">Encuéntranos en Plaza Gavilanes, al sur de Guadalajara.</h2>
-          <p class="lede">
-            {siteConfig.address}. Es una parada cómoda para desayunar, hacer una pausa bien servida o
-            recoger el café que ya apartaste en línea.
-          </p>
-
-          <div class="contact-stack">
-            <div class="note-card">
-              <strong>Horarios</strong>
-              <div class="hours-list">
-                {siteConfig.hours.map((entry) => (
-                  <div class="hours-row">
-                    <span>{entry.label}</span>
-                    <strong>{entry.value}</strong>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div class="note-card">
-              <strong>Conecta con Auténtiko</strong>
-              <p>
-                <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-                {' · '}
-                <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
-                  WhatsApp {siteConfig.whatsappDisplay}
-                </a>
-              </p>
-            </div>
-
-            <div class="note-card">
-              <strong>Recoger en tienda</strong>
-              <p>
-                Si compras en línea, también puedes pasar por tu café cuando te quede mejor dentro del
-                horario de servicio.
-              </p>
-            </div>
-          </div>
-
-          <a class="map-link" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
-            Abrir ubicación en Google Maps
+        <div class="visit-strip__actions">
+          <a class="button button-primary" href="/ubicacion">Ver ubicación y horarios</a>
+          <a class="button button-secondary" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
+            Abrir en Maps
           </a>
-        </article>
-
-        <article class="contact-card">
-          <iframe
-            title="Mapa de Auténtiko Café"
-            src={siteConfig.mapsEmbedUrl}
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          />
-        </article>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="shell site-footer__inner">
-      <div>
-        <p>{siteConfig.brand} · Barra diaria, cocina ligera y café de Chiapas tostado con oficio.</p>
-        <nav class="site-footer__nav" aria-label="Enlaces legales">
-          <a href="/aviso-de-privacidad">Aviso de privacidad</a>
-          <a href="/terminos-de-compra">Términos de compra</a>
-          <a href="/envios-cancelaciones-y-devoluciones">Envíos, cancelaciones y devoluciones</a>
-        </nav>
-      </div>
-      <p>Tlajomulco, Jalisco · Envíos a todo México · También puedes recoger en tienda</p>
-    </div>
-  </footer>
-
-  <script is:inline define:vars={{ basePrice, shippingFee }}>
-    const form = document.querySelector('[data-coffee-form]');
-
-    if (form instanceof HTMLFormElement) {
-      const productTarget = form.querySelector('[data-summary-product]');
-      const deliveryTarget = form.querySelector('[data-summary-delivery]');
-      const totalTarget = form.querySelector('[data-summary-total]');
-      const formatCurrency = new Intl.NumberFormat('es-MX', {
-        style: 'currency',
-        currency: 'MXN',
-        maximumFractionDigits: 0,
-      });
-
-      const updateSummary = () => {
-        const selectedWeight = form.querySelector('input[name="weight"]:checked');
-        const selectedFulfillment = form.querySelector('input[name="fulfillment"]:checked');
-
-        const productValue = Number(selectedWeight?.dataset.price ?? basePrice);
-        const deliveryValue = Number(selectedFulfillment?.dataset.fee ?? shippingFee);
-
-        if (productTarget) productTarget.textContent = formatCurrency.format(productValue);
-        if (deliveryTarget) {
-          deliveryTarget.textContent =
-            deliveryValue === 0 ? 'Sin costo' : formatCurrency.format(deliveryValue);
-        }
-        if (totalTarget) {
-          totalTarget.textContent = formatCurrency.format(productValue + deliveryValue);
-        }
-      };
-
-      form.addEventListener('change', updateSummary);
-      updateSummary();
-    }
-  </script>
+  <SiteFooter />
 </Layout>

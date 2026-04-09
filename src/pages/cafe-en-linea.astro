@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import CoffeeOrderForm from '../components/CoffeeOrderForm.astro';
+import { currencyFormatter, siteConfig } from '../data/site';
+import tostadoPosterImage from '../assets/products/bebida-2.jpeg';
+import tostadoVideo from '../assets/products/tostado.mp4';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  '@id': `${Astro.url.origin}/#cafe-chiapas`,
+  name: `${siteConfig.brand} ${siteConfig.coffeeProduct.name}`,
+  description: siteConfig.coffeeProduct.description,
+  brand: {
+    '@type': 'Brand',
+    name: siteConfig.brand,
+  },
+  seller: {
+    '@type': 'CafeOrCoffeeShop',
+    name: siteConfig.brand,
+    url: Astro.url.toString(),
+  },
+  areaServed: 'MX',
+  category: 'Café tostado',
+  offers: siteConfig.coffeeProduct.weightOptions.map((option) => ({
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    priceCurrency: 'MXN',
+    price: option.price,
+    itemCondition: 'https://schema.org/NewCondition',
+    url: `${Astro.url.toString()}#pedido`,
+  })),
+};
+---
+
+<Layout
+  title="Café en línea | Auténtiko Café"
+  description="Compra café de Chiapas tostado por Auténtiko Café. Elige 500 g o 1 kg, en grano o molido, con envío a todo México o recogida en tienda."
+  structuredData={structuredData}
+>
+  <SiteHeader currentPath="/cafe-en-linea" />
+
+  <main>
+    <section class="section video-hero">
+      <video
+        class="video-hero__media"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={tostadoPosterImage.src}
+      >
+        <source src={tostadoVideo} type="video/mp4" />
+      </video>
+      <div class="video-hero__overlay"></div>
+
+      <div class="shell video-hero__content">
+        <div class="video-hero__copy">
+          <span class="eyebrow">Café en línea</span>
+          <h1 class="display display--page">El café de Auténtiko, tostado con oficio y listo para llegar hasta tu casa.</h1>
+          <p class="lede video-hero__lede">
+            Nuestro café de Chiapas se puede pedir en grano o molido, en 500 g o 1 kg, con envío a
+            todo México o para recoger en Plaza Gavilanes.
+          </p>
+          <div class="hero-badges">
+            <span class="pill"><strong>500 g</strong> {currencyFormatter.format(300)}</span>
+            <span class="pill"><strong>1 kg</strong> {currencyFormatter.format(450)}</span>
+            <span class="pill"><strong>Envío nacional</strong> {currencyFormatter.format(siteConfig.shippingFee)}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--purchase" id="pedido">
+      <div class="shell purchase-grid">
+        <article class="purchase-shell">
+          <div class="purchase-card purchase-card--highlight">
+            <span class="eyebrow">Tueste y origen</span>
+            <h2 class="section-title">Café de Chiapas para casa, barra y regalo.</h2>
+            <p class="lede">{siteConfig.coffeeProduct.description}</p>
+          </div>
+
+          <div class="story-card">
+            <span class="eyebrow">Lo que pides</span>
+            <h3>{siteConfig.coffeeProduct.name}</h3>
+            <p>{siteConfig.coffeeProduct.subtitle}</p>
+            <ul class="benefit-list">
+              {siteConfig.coffeeProduct.benefits.map((benefit) => <li>{benefit}</li>)}
+            </ul>
+          </div>
+
+          <div class="story-card story-card--accent">
+            <span class="eyebrow">Cómo llega</span>
+            <h3>Envío simple o pickup sin vueltas.</h3>
+            <ul class="story-list">
+              <li>Si eliges envío, la dirección se captura al momento de pagar.</li>
+              <li>Si eliges recoger en tienda, preparas tu pedido y pasas por él dentro del horario de servicio.</li>
+              <li>Si quieres ayuda para decidir molienda o formato, te atendemos por WhatsApp.</li>
+            </ul>
+          </div>
+        </article>
+
+        <CoffeeOrderForm />
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>

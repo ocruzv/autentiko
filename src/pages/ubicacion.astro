@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteConfig } from '../data/site';
+import bebidaImage from '../assets/products/bebida.jpeg';
+import flatWhiteImage from '../assets/products/flat-white.jpeg';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  name: siteConfig.brand,
+  image: '/brand/autentiko-logo.png',
+  description: siteConfig.description,
+  telephone: siteConfig.whatsappDisplay,
+  hasMap: siteConfig.mapsUrl,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plaza Gavilanes, Local 14, Los Gavilanes',
+    addressLocality: 'Tlajomulco de Zúñiga',
+    addressRegion: 'Jalisco',
+    postalCode: '45645',
+    addressCountry: 'MX',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '07:00',
+      closes: '19:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '08:00',
+      closes: '14:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '09:00',
+      closes: '13:00',
+    },
+  ],
+};
+---
+
+<Layout
+  title="Ubicación y horarios | Auténtiko Café"
+  description="Consulta la ubicación, horarios, mapa y contacto de Auténtiko Café en Plaza Gavilanes, al sur de Guadalajara."
+  structuredData={structuredData}
+>
+  <SiteHeader currentPath="/ubicacion" />
+
+  <main>
+    <section class="section page-hero">
+      <div class="shell page-hero__grid">
+        <div class="page-hero__copy">
+          <span class="eyebrow">Ubicación</span>
+          <h1 class="display display--page">Auténtiko está en Plaza Gavilanes, listo para una pausa bien servida.</h1>
+          <p class="lede">
+            Si vienes por desayuno, por una taza tranquila o por recoger tu pedido, aquí tienes mapa,
+            horarios y contacto directo para caerle sin buscar de más.
+          </p>
+          <div class="button-row">
+            <a class="button button-primary" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
+              Abrir en Google Maps
+            </a>
+            <a class="button button-secondary" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="visual-stack">
+          <figure class="visual-card visual-card--portrait">
+            <Image src={bebidaImage} alt="Bebida servida en Auténtiko Café" widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 33vw" />
+          </figure>
+          <figure class="visual-card">
+            <Image src={flatWhiteImage} alt="Flat white servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 100vw, 16vw" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--contact">
+      <div class="shell contact-grid">
+        <article class="contact-card">
+          <span class="eyebrow">Ven a visitarnos</span>
+          <h2 class="section-title">Encuéntranos en Plaza Gavilanes, local 14.</h2>
+          <p class="lede">
+            {siteConfig.address}. Es una parada cómoda para desayunar, hacer una pausa bien servida o
+            recoger el café que ya apartaste en línea.
+          </p>
+
+          <div class="contact-stack">
+            <div class="note-card">
+              <strong>Horarios</strong>
+              <div class="hours-list">
+                {siteConfig.hours.map((entry) => (
+                  <div class="hours-row">
+                    <span>{entry.label}</span>
+                    <strong>{entry.value}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div class="note-card">
+              <strong>Conecta con Auténtiko</strong>
+              <p>
+                <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+                {' · '}
+                <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
+                  WhatsApp {siteConfig.whatsappDisplay}
+                </a>
+              </p>
+            </div>
+
+            <div class="note-card">
+              <strong>Recoger en tienda</strong>
+              <p>
+                Si compras en línea, también puedes pasar por tu café cuando te quede mejor dentro del
+                horario de servicio.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="contact-card">
+          <iframe
+            title="Mapa de Auténtiko Café"
+            src={siteConfig.mapsEmbedUrl}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          />
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>

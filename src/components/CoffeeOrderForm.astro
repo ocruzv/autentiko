@@ -1,0 +1,141 @@
+---
+import { currencyFormatter, siteConfig } from '../data/site';
+
+const basePrice = siteConfig.coffeeProduct.weightOptions[0]?.price ?? 0;
+const shippingFee = siteConfig.shippingFee;
+---
+
+<article class="selection-card">
+  <span class="eyebrow">Pedido</span>
+  <h3>Arma tu pedido</h3>
+  <p>
+    Elige el tamaño, la molienda y cómo prefieres recibirlo. Si eliges envío, la dirección se pide
+    al momento de pagar.
+  </p>
+
+  <form class="checkout-panel" method="POST" action="/api/checkout" data-coffee-form>
+    <fieldset class="choice-group">
+      <legend><strong>Peso</strong></legend>
+      {siteConfig.coffeeProduct.weightOptions.map((option, index) => (
+        <div class="choice-card">
+          <input
+            type="radio"
+            id={`weight-${option.value}`}
+            name="weight"
+            value={option.value}
+            checked={index === 0}
+            data-price={option.price}
+          />
+          <label for={`weight-${option.value}`}>
+            <strong>{option.label} · {currencyFormatter.format(option.price)}</strong>
+            <span>{option.detail}</span>
+          </label>
+        </div>
+      ))}
+    </fieldset>
+
+    <fieldset class="choice-group">
+      <legend><strong>Molienda</strong></legend>
+      {siteConfig.coffeeProduct.grindOptions.map((option, index) => (
+        <div class="choice-card">
+          <input
+            type="radio"
+            id={`grind-${option.value}`}
+            name="grind"
+            value={option.value}
+            checked={index === 0}
+          />
+          <label for={`grind-${option.value}`}>
+            <strong>{option.label}</strong>
+            <span>{option.detail}</span>
+          </label>
+        </div>
+      ))}
+    </fieldset>
+
+    <fieldset class="choice-group">
+      <legend><strong>Entrega</strong></legend>
+      {siteConfig.coffeeProduct.fulfillmentOptions.map((option, index) => (
+        <div class="choice-card">
+          <input
+            type="radio"
+            id={`fulfillment-${option.value}`}
+            name="fulfillment"
+            value={option.value}
+            checked={index === 0}
+            data-fee={option.fee}
+          />
+          <label for={`fulfillment-${option.value}`}>
+            <strong>
+              {option.label}
+              {option.fee > 0 && ` · ${currencyFormatter.format(option.fee)}`}
+            </strong>
+            <span>{option.detail}</span>
+          </label>
+        </div>
+      ))}
+    </fieldset>
+
+    <div class="summary-box" aria-live="polite">
+      <div class="summary-line">
+        <span>Producto</span>
+        <strong data-summary-product>{currencyFormatter.format(basePrice)}</strong>
+      </div>
+      <div class="summary-line">
+        <span>Entrega</span>
+        <strong data-summary-delivery>{currencyFormatter.format(shippingFee)}</strong>
+      </div>
+      <div class="summary-line summary-total">
+        <span>Total estimado</span>
+        <strong data-summary-total>{currencyFormatter.format(basePrice + shippingFee)}</strong>
+      </div>
+    </div>
+
+    <p class="checkout-note">
+      Si eliges envío, capturas tu dirección al pagar. Si prefieres recogerlo en tienda, solo cubres
+      el café y pasas por él cuando te quede bien.
+    </p>
+
+    <div class="button-row">
+      <button class="button button-primary" type="submit">Ir al pago</button>
+      <a class="button button-secondary" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
+        Resolver dudas por WhatsApp
+      </a>
+    </div>
+  </form>
+</article>
+
+<script is:inline define:vars={{ basePrice, shippingFee }}>
+  const form = document.querySelector('[data-coffee-form]');
+
+  if (form instanceof HTMLFormElement) {
+    const productTarget = form.querySelector('[data-summary-product]');
+    const deliveryTarget = form.querySelector('[data-summary-delivery]');
+    const totalTarget = form.querySelector('[data-summary-total]');
+    const formatCurrency = new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+      maximumFractionDigits: 0,
+    });
+
+    const updateSummary = () => {
+      const selectedWeight = form.querySelector('input[name="weight"]:checked');
+      const selectedFulfillment = form.querySelector('input[name="fulfillment"]:checked');
+
+      const productValue = Number(selectedWeight?.dataset.price ?? basePrice);
+      const deliveryValue = Number(selectedFulfillment?.dataset.fee ?? shippingFee);
+
+      if (productTarget) productTarget.textContent = formatCurrency.format(productValue);
+      if (deliveryTarget) {
+        deliveryTarget.textContent =
+          deliveryValue === 0 ? 'Sin costo' : formatCurrency.format(deliveryValue);
+      }
+      if (totalTarget) {
+        totalTarget.textContent = formatCurrency.format(productValue + deliveryValue);
+      }
+    };
+
+    form.addEventListener('change', updateSummary);
+    updateSummary();
+  }
+</script>

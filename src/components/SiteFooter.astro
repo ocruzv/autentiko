@@ -1,0 +1,34 @@
+---
+import { siteConfig } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="shell site-footer__inner">
+    <div>
+      <p>{siteConfig.brand} · Barra diaria, cocina ligera y café de Chiapas tostado con oficio.</p>
+      <nav class="site-footer__nav" aria-label="Navegación del sitio">
+        <a href="/">Inicio</a>
+        <a href="/menu">Menú</a>
+        <a href="/cafe-en-linea">Café en línea</a>
+        <a href="/ubicacion">Ubicación</a>
+      </nav>
+      <nav class="site-footer__nav" aria-label="Enlaces legales">
+        <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+        <a href="/terminos-de-compra">Términos de compra</a>
+        <a href="/envios-cancelaciones-y-devoluciones">Envíos, cancelaciones y devoluciones</a>
+      </nav>
+    </div>
+
+    <div class="site-footer__meta">
+      <p>{siteConfig.address}</p>
+      <p>Tlajomulco, Jalisco · Envíos a todo México · También puedes recoger en tienda</p>
+      <p>
+        <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
+          WhatsApp {siteConfig.whatsappDisplay}
+        </a>
+        {' · '}
+        <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
+      </p>
+    </div>
+  </div>
+</footer>

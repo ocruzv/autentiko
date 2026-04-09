@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteConfig } from '../data/site';
+import bebidaHeroImage from '../assets/products/bebida-2.jpeg';
+import bebidaImage from '../assets/products/bebida.jpeg';
+import flatWhiteImage from '../assets/products/flat-white.jpeg';
+import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Menu',
+  name: `Menú de ${siteConfig.brand}`,
+  url: Astro.url.toString(),
+  hasMenuSection: siteConfig.menuSections.map((section) => ({
+    '@type': 'MenuSection',
+    name: section.title,
+    hasMenuItem: section.items.map((item) => ({
+      '@type': 'MenuItem',
+      name: item.name,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'MXN',
+        price: item.price.replace('$', ''),
+      },
+    })),
+  })),
+};
+---
+
+<Layout
+  title="Menú | Auténtiko Café"
+  description="Explora el menú completo de Auténtiko Café: bebidas calientes, frías, frappés, baguettes y desayunos en el sur de Guadalajara."
+  structuredData={structuredData}
+>
+  <SiteHeader currentPath="/menu" />
+
+  <main>
+    <section class="section page-hero">
+      <div class="shell page-hero__grid">
+        <div class="page-hero__copy">
+          <span class="eyebrow">Menú completo</span>
+          <h1 class="display display--page">Todo lo que sale de la barra y la cocina, en un solo lugar.</h1>
+          <p class="lede">
+            Aquí está el menú completo de Auténtiko Café: bebidas calientes, frías, frappés,
+            baguettes, desayunos y antojos de la casa para revisar con calma antes de venir o escribir.
+          </p>
+          <div class="hero-badges">
+            <span class="pill"><strong>Chilaquiles</strong> $139</span>
+            <span class="pill"><strong>Huevos auténtikos</strong> $135</span>
+            <span class="pill"><strong>WhatsApp</strong> para dudas o pedidos</span>
+          </div>
+        </div>
+
+        <div class="visual-stack">
+          <figure class="visual-card visual-card--portrait">
+            <Image src={bebidaHeroImage} alt="Bebida servida en Auténtiko Café" widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 33vw" />
+          </figure>
+          <div class="visual-stack__pair">
+            <figure class="visual-card">
+              <Image src={flatWhiteImage} alt="Flat white servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 50vw, 16vw" />
+            </figure>
+            <figure class="visual-card">
+              <Image src={chilaquilesImage} alt="Chilaquiles servidos en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 50vw, 16vw" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--menu">
+      <div class="shell">
+        <div class="menu-grid">
+          {siteConfig.menuSections.map((section) => (
+            <article class="menu-card" id={section.id}>
+              <span class="eyebrow">{section.eyebrow}</span>
+              <h2>{section.title}</h2>
+              <p>{section.note}</p>
+
+              <ul class={section.id === 'baguettes' || section.id === 'desayunos' ? 'menu-food-list' : 'menu-list'}>
+                {section.items.map((item) => (
+                  <li>
+                    <div class="menu-item">
+                      <strong>{item.name}</strong>
+                      <span>{item.price}</span>
+                    </div>
+                    {item.description && <p class="menu-item-desc">{item.description}</p>}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+
+        <div class="menu-bottom-grid">
+          <article class="note-card">
+            <strong>Algo frío para la tarde</strong>
+            <p>
+              Frappés, bebidas frías y café bien servido para cuando pega el calor. Si quieres pedir
+              algo para pasar por ello, escríbenos por WhatsApp.
+            </p>
+            <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+          </article>
+
+          <figure class="visual-card visual-card--wide">
+            <Image src={bebidaImage} alt="Bebidas frías servidas en Auténtiko Café" widths={[720, 960]} sizes="(max-width: 60rem) 100vw, 36vw" />
+          </figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</Layout>
