@@ -5,7 +5,8 @@ import SiteFooter from '../components/SiteFooter.astro';
 import CoffeeOrderForm from '../components/CoffeeOrderForm.astro';
 import { currencyFormatter, siteConfig } from '../data/site';
 import tostadoPosterImage from '../assets/products/bebida-2.jpeg';
-import tostadoVideo from '../assets/products/tostado.mp4';
+import tostadoVideoMp4 from '../assets/products/tostado-web.mp4';
+import tostadoVideoWebm from '../assets/products/tostado-v2.webm';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -53,7 +54,8 @@ const structuredData = {
         preload="metadata"
         poster={tostadoPosterImage.src}
       >
-        <source src={tostadoVideo} type="video/mp4" />
+        <source src={tostadoVideoWebm} type="video/webm" />
+        <source src={tostadoVideoMp4} type="video/mp4" />
       </video>
       <div class="video-hero__overlay"></div>
 
