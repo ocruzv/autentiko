@@ -1,9 +1,36 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import { currencyFormatter, siteConfig } from '../data/site';
+import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
+import huevosAutentikosImage from '../assets/products/huevos-autentikos.jpeg';
+import huevosAutentikosAltImage from '../assets/products/huevos-autentikos-2.jpeg';
 
 const basePrice = siteConfig.coffeeProduct.weightOptions[0]?.price ?? 0;
 const shippingFee = siteConfig.shippingFee;
+const showcaseItems = [
+  {
+    image: chilaquilesImage,
+    alt: 'Chilaquiles servidos en Auténtiko Café',
+    title: 'Chilaquiles de la casa',
+    detail: 'Para llegar con hambre y quedarse con ganas de volver.',
+    featured: true,
+  },
+  {
+    image: huevosAutentikosImage,
+    alt: 'Huevos auténtikos servidos en Auténtiko Café',
+    title: 'Huevos auténtikos',
+    detail: 'Desayuno hecho al momento, con ese punto casero que reconforta.',
+    featured: false,
+  },
+  {
+    image: huevosAutentikosAltImage,
+    alt: 'Plato de desayuno servido en Auténtiko Café',
+    title: 'Mañanas con calma',
+    detail: 'Platos que acompañan bien una taza servida sin prisa.',
+    featured: false,
+  },
+] as const;
 
 const structuredData = [
   {
@@ -233,6 +260,38 @@ const structuredData = [
             <li>Café de Chiapas también para llevar a tu cocina, en grano o molido.</li>
           </ul>
         </article>
+      </div>
+    </section>
+
+    <section class="section section--showcase" aria-labelledby="de-la-cocina">
+      <div class="shell showcase-grid">
+        <article class="showcase-copy">
+          <span class="eyebrow">De la cocina</span>
+          <h2 class="section-title" id="de-la-cocina">Desayunos que se antojan antes de llegar.</h2>
+          <p class="lede">
+            Ya empezamos a sumar fotos reales de la casa para que se vea mejor lo que pasa en la barra
+            y la cocina: chilaquiles, huevos y platos que piden café al lado.
+          </p>
+          <a class="button button-secondary" href="#menu">Ver desayunos en el menú</a>
+        </article>
+
+        <div class="showcase-gallery">
+          {showcaseItems.map((item) => (
+            <figure class:list={['showcase-card', item.featured && 'showcase-card--featured']}>
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[480, 720, 960]}
+                sizes={item.featured ? '(max-width: 60rem) 100vw, 42vw' : '(max-width: 60rem) 100vw, 21vw'}
+                loading="lazy"
+              />
+              <figcaption class="showcase-card__body">
+                <strong>{item.title}</strong>
+                <span>{item.detail}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
 

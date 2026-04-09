@@ -168,8 +168,13 @@ const menuSections: MenuSection[] = [
     id: 'desayunos',
     eyebrow: 'Cocina',
     title: 'Desayuno',
-    note: 'Hecho al momento para llegar temprano y quedarse a gusto.',
+    note: 'Hecho al momento para llegar temprano, desayunar rico y quedarse a gusto.',
     items: [
+      {
+        name: 'Chilaquiles',
+        price: '$139',
+        description: 'Una opción abundante y reconfortante para empezar la mañana con calma.',
+      },
       {
         name: 'Huevos auténtikos',
         price: '$135',
