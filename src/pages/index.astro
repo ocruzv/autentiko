@@ -4,30 +4,26 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { siteConfig } from '../data/site';
+import heroTable from '../assets/editorial/autentiko-table.png';
 import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
-import bebidaHeroImage from '../assets/products/bebida-2.jpeg';
+import huevosImage from '../assets/products/huevos-autentikos-2.jpeg';
 import flatWhiteImage from '../assets/products/flat-white.jpeg';
+import bebidaImage from '../assets/products/bebida-3.jpeg';
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'CafeOrCoffeeShop',
   '@id': `${Astro.url.origin}/#cafeteria`,
   name: siteConfig.brand,
-  image: '/brand/autentiko-logo.png',
+  image: '/og-autentiko-cafe.svg',
   description: siteConfig.description,
   servesCuisine: ['Coffee', 'Breakfast', 'Sandwiches'],
   telephone: siteConfig.whatsappDisplay,
   priceRange: '$$',
   hasMap: siteConfig.mapsUrl,
-  areaServed: ['Guadalajara', 'Tlajomulco de Zúñiga', 'México'],
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 20.5694,
-    longitude: -103.4408,
-  },
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Plaza Gavilanes, Local 14, Los Gavilanes',
+    streetAddress: 'Plaza Gavilanes, Local 16, Los Gavilanes',
     addressLocality: 'Tlajomulco de Zúñiga',
     addressRegion: 'Jalisco',
     postalCode: '45645',
@@ -39,171 +35,149 @@ const structuredData = {
 ---
 
 <Layout
-  title="Auténtiko Café | Cafetería en el sur de Guadalajara"
-  description="Auténtiko Café es una cafetería en Los Gavilanes, al sur de Guadalajara, con barra cuidada, desayunos de la casa y café de Chiapas para llevar o pedir en línea."
+  title="Auténtiko Café | Café y desayuno en Plaza Gavilanes"
+  description="Café bien servido, desayunos generosos y sobremesa en Plaza Gavilanes, al sur de Guadalajara. Consulta el nuevo menú de Auténtiko Café."
   structuredData={structuredData}
 >
   <SiteHeader currentPath="/" />
 
   <main>
-    <section class="section hero">
-      <div class="shell hero-grid hero-grid--home">
-        <div class="hero-copy">
-          <span class="eyebrow">Cafetería en el sur de Guadalajara</span>
-          <h1 class="display">Café bien servido, desayunos con antojo y una pausa que sí se antoja repetir.</h1>
-          <p class="lede">
-            En Los Gavilanes está Auténtiko: una barra cercana con café de Chiapas, cocina de la casa
-            y ese ritmo tranquilo que dan ganas de alargar un poco más.
+    <section class="ac-hero" aria-labelledby="hero-title">
+      <div class="ac-hero__media" aria-hidden="true" data-hero-media>
+        <Image
+          src={heroTable}
+          alt=""
+          widths={[720, 1080, 1440, 1920]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="ac-hero__wash"></div>
+
+      <div class="ac-shell ac-hero__content">
+        <div class="ac-hero__copy">
+          <span class="ac-kicker ac-kicker--light">Plaza Gavilanes · Local 16</span>
+          <h1 id="hero-title">Aquí se viene<br />a comer <em>bien.</em></h1>
+          <p>
+            Café bien servido, desayunos con carácter y una mesa donde la mañana puede tomarse su tiempo.
           </p>
-
-          <div class="hero-badges">
-            <span class="pill"><strong>Plaza Gavilanes</strong> Local 14</span>
-            <span class="pill"><strong>Recoger en tienda</strong> sin costo</span>
-            <span class="pill"><strong>Envío a todo México</strong> para el café en línea</span>
-          </div>
-
-          <div class="button-row">
-            <a class="button button-primary" href="/menu">Ver menú</a>
-            <a class="button button-secondary" href="/cafe-en-linea">Comprar café</a>
-            <a class="button button-text" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
-              Pedir por WhatsApp
-            </a>
+          <div class="ac-actions">
+            <a class="ac-button ac-button--cream" href="/menu">Descubrir el menú <span aria-hidden="true">↗</span></a>
+            <a class="ac-link ac-link--light" href="/ubicacion">Ver horarios y ubicación</a>
           </div>
         </div>
 
-        <aside class="hero-panel" aria-label="Rutas principales del sitio">
-          <div class="hero-panel__top">
-            <div class="hero-panel__intro">
-              <strong>{siteConfig.shortBrand}</strong>
-              <p>{siteConfig.tagline}</p>
-            </div>
+        <div class="ac-hero__stamp" aria-hidden="true">
+          <img src="/brand/coffee-sun.svg" alt="" width="220" height="220" />
+          <span>CAFÉ · COCINA · SOBREMESA</span>
+        </div>
 
-            <div class="hero-panel__mark" aria-hidden="true">
-              <img src="/brand/autentiko-logo.svg" alt="" width="360" height="360" />
-            </div>
-          </div>
-
-          <div class="route-grid">
-            <a class="route-card" href="/menu">
-              <strong>Menú completo</strong>
-              <span>Bebidas calientes, frías, frappés, baguettes y desayunos.</span>
-            </a>
-            <a class="route-card" href="/cafe-en-linea">
-              <strong>Café en línea</strong>
-              <span>Compra 500 g o 1 kg, en grano o molido, con envío o pickup.</span>
-            </a>
-            <a class="route-card" href="/ubicacion">
-              <strong>Ubicación</strong>
-              <span>Horarios, mapa, contacto y todo para caerle sin rodeos.</span>
-            </a>
-          </div>
-
-          <p class="hero-panel__note">
-            Un lugar para desayunar entre semana, invitar a alguien el sábado o seguir tomando el
-            mismo café en casa.
-          </p>
-        </aside>
+        <span class="ac-scroll-cue" aria-hidden="true">Desliza para entrar <i></i></span>
       </div>
     </section>
 
-    <section class="section" id="historia">
-      <div class="shell story-grid">
-        <article class="story-card story-card--accent">
-          <span class="eyebrow">La casa</span>
-          <h2 class="section-title">Una barra cercana, con oficio de verdad.</h2>
-          <p class="lede">
-            {siteConfig.brand} nace con el gusto por servir bien: producto honesto, sabores que
-            reconfortan y una atención que se siente cercana desde la primera taza.
-          </p>
+    <div class="ac-marquee" aria-label="Especialidades de Auténtiko Café">
+      <div>
+        <span>CAFÉ DE CHIAPAS</span><i>✦</i><span>CHILAQUILES ROJOS</span><i>✦</i><span>FLAT WHITE</span><i>✦</i><span>PAN DE MASA MADRE</span><i>✦</i><span>DESAYUNO TODO EL DÍA</span><i>✦</i>
+        <span aria-hidden="true">CAFÉ DE CHIAPAS</span><i aria-hidden="true">✦</i><span aria-hidden="true">CHILAQUILES ROJOS</span><i aria-hidden="true">✦</i><span aria-hidden="true">FLAT WHITE</span><i aria-hidden="true">✦</i><span aria-hidden="true">PAN DE MASA MADRE</span><i aria-hidden="true">✦</i><span aria-hidden="true">DESAYUNO TODO EL DÍA</span><i aria-hidden="true">✦</i>
+      </div>
+    </div>
 
-          <ul class="story-list">
-            <li>Grano chiapaneco tostado por maestro tostador para una taza limpia y memorable.</li>
-            <li>Recetas pensadas para volverse parte de la rutina: espresso, lattes, frappés y cocina de la casa.</li>
-            <li>Un rincón al sur de Guadalajara para pasar por tu café, quedarte un rato o llevarlo a casa.</li>
-          </ul>
-        </article>
-
-        <article class="story-card">
-          <span class="eyebrow">Lo que pasa aquí</span>
-          <h2 class="section-title">Entre la barra y la cocina, todo invita a volver.</h2>
-          <p class="lede">
-            Auténtiko está hecho para esas mañanas y tardes que merecen algo mejor: una taza bien
-            hecha, un desayuno con antojo y una mesa donde la conversación se queda un poco más.
-          </p>
-
-          <div class="mini-links">
-            <a class="mini-link" href="/menu">
-              <strong>Ver el menú</strong>
-              <span>Chilaquiles, huevos, baguettes y bebidas de la casa.</span>
-            </a>
-            <a class="mini-link" href="/ubicacion">
-              <strong>Planear la visita</strong>
-              <span>Horarios, mapa y contacto directo por WhatsApp.</span>
-            </a>
-            <a class="mini-link" href="/cafe-en-linea">
-              <strong>Llevar el café a casa</strong>
-              <span>Compra en línea con envío nacional o recogida en tienda.</span>
-            </a>
-          </div>
-        </article>
+    <section class="ac-intro ac-section">
+      <div class="ac-shell ac-intro__grid">
+        <p class="ac-intro__index" data-reveal>01 / LA CASA</p>
+        <div data-reveal>
+          <span class="ac-kicker">El sur también desayuna bonito</span>
+          <h2>No somos una pausa rápida. Somos la razón para hacerla.</h2>
+        </div>
+        <p class="ac-intro__body" data-reveal>
+          Auténtiko es una barra de barrio con apetito de gran café: recetas francas, producto cuidado y gente que te recibe por tu nombre. Ven por un espresso; quédate por los chilaquiles.
+        </p>
       </div>
     </section>
 
-    <section class="section section--showcase" aria-labelledby="de-la-cocina">
-      <div class="shell showcase-grid">
-        <article class="showcase-copy">
-          <span class="eyebrow">De la casa</span>
-          <h2 class="section-title" id="de-la-cocina">Lo que sale de la barra y la cocina ya se ve como sabe.</h2>
-          <p class="lede">
-            El menú ya no vive escondido en una sola página. Ahora hay espacio para ver mejor los
-            desayunos, las bebidas y el café que puedes pedir para casa.
-          </p>
-          <div class="button-row">
-            <a class="button button-primary" href="/menu">Explorar el menú</a>
-            <a class="button button-secondary" href="/cafe-en-linea">Ir a café en línea</a>
-          </div>
-        </article>
+    <section class="ac-table ac-section" aria-labelledby="table-title">
+      <div class="ac-shell ac-table__layout">
+        <div class="ac-table__rail" data-reveal>
+          <span class="ac-kicker">De la barra a la mesa</span>
+          <h2 id="table-title">Cada antojo tiene su momento.</h2>
+          <p>Desayunos de mañana larga, café de paso y algo frío cuando pega el sol.</p>
+          <a class="ac-link" href="/menu">Ver todos los precios <span aria-hidden="true">↗</span></a>
+        </div>
 
-        <div class="showcase-gallery">
-          <figure class="showcase-card showcase-card--featured">
-            <Image src={chilaquilesImage} alt="Chilaquiles servidos en Auténtiko Café" widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 42vw" />
-            <figcaption class="showcase-card__body">
-              <strong>Chilaquiles de la casa</strong>
-              <span>Para llegar con hambre y quedarse con ganas de volver.</span>
-            </figcaption>
+        <div class="ac-food-gallery">
+          <figure class="ac-food ac-food--large" data-reveal>
+            <Image src={chilaquilesImage} alt="Chilaquiles rojos de Auténtiko Café" widths={[640, 960, 1280]} sizes="(max-width: 52rem) 100vw, 54vw" />
+            <figcaption><span>01</span><strong>Chilaquiles rojos</strong><small>Crujientes, cremosos, de los que sí despiertan.</small></figcaption>
           </figure>
-
-          <figure class="showcase-card">
-            <Image src={bebidaHeroImage} alt="Bebida servida en la barra de Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 100vw, 21vw" />
-            <figcaption class="showcase-card__body">
-              <strong>Barra fresca</strong>
-              <span>Bebidas que saben a pausa bien servida.</span>
-            </figcaption>
+          <figure class="ac-food ac-food--portrait" data-reveal>
+            <Image src={flatWhiteImage} alt="Flat white servido en una taza de Auténtiko Café" widths={[480, 720]} sizes="(max-width: 52rem) 92vw, 30vw" />
+            <figcaption><span>02</span><strong>Flat white</strong><small>Una taza precisa, sin hacer tanto ruido.</small></figcaption>
           </figure>
-
-          <figure class="showcase-card">
-            <Image src={flatWhiteImage} alt="Flat white servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 100vw, 21vw" />
-            <figcaption class="showcase-card__body">
-              <strong>Café diario</strong>
-              <span>Tazas cuidadas para volver una y otra vez.</span>
-            </figcaption>
+          <figure class="ac-food ac-food--wide" data-reveal>
+            <Image src={huevosImage} alt="Desayuno de huevos servido en Auténtiko Café" widths={[640, 960]} sizes="(max-width: 52rem) 100vw, 44vw" />
+            <figcaption><span>03</span><strong>Desayuno Auténtiko</strong><small>Para llegar con hambre.</small></figcaption>
+          </figure>
+          <figure class="ac-food ac-food--small" data-reveal>
+            <Image src={bebidaImage} alt="Bebida fría preparada en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 52rem) 80vw, 26vw" />
+            <figcaption><span>04</span><strong>Barra fría</strong><small>La tarde, pero con hielo.</small></figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <section class="section section--contact">
-      <div class="shell visit-strip">
-        <div>
-          <span class="eyebrow">Visítanos</span>
-          <h2 class="section-title">Todo lo importante para caerle a Auténtiko, sin buscar de más.</h2>
+    <section class="ac-menu-preview ac-section" aria-labelledby="menu-preview-title">
+      <div class="ac-shell">
+        <div class="ac-menu-preview__head" data-reveal>
+          <div>
+            <span class="ac-kicker ac-kicker--light">Una probadita</span>
+            <h2 id="menu-preview-title">El menú cambió.<br />El antojo también.</h2>
+          </div>
+          <p>Precios claros, porciones honestas y suficientes razones para volver otro día.</p>
         </div>
 
-        <div class="visit-strip__actions">
-          <a class="button button-primary" href="/ubicacion">Ver ubicación y horarios</a>
-          <a class="button button-secondary" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">
-            Abrir en Maps
-          </a>
+        <div class="ac-menu-lines">
+          <a href="/menu#calientes" data-reveal><span>01</span><strong>Espresso &amp; leche</strong><small>Desde $25</small><i>↗</i></a>
+          <a href="/menu#rancho" data-reveal><span>02</span><strong>Desayunos de rancho</strong><small>Desde $129</small><i>↗</i></a>
+          <a href="/menu#baguettes" data-reveal><span>03</span><strong>Baguettes de masa madre</strong><small>Desde $119</small><i>↗</i></a>
+          <a href="/menu#frappes" data-reveal><span>04</span><strong>Fríos &amp; frappés</strong><small>Desde $75</small><i>↗</i></a>
+        </div>
+
+        <a class="ac-button ac-button--tomato" href="/menu">Abrir el menú completo <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="ac-welcome ac-section" aria-labelledby="welcome-title">
+      <div class="ac-shell ac-welcome__grid">
+        <div class="ac-welcome__art" data-reveal>
+          <span class="ac-welcome__sun"></span>
+          <img src="/brand/nacho-host.svg" alt="Ilustración de Nacho con mandil y una tablet, listo para tomar la orden" width="920" height="1040" loading="lazy" />
+        </div>
+        <div class="ac-welcome__copy" data-reveal>
+          <span class="ac-kicker">El anfitrión</span>
+          <h2 id="welcome-title">“Bienvenidos a Auténtiko Café.”</h2>
+          <p>
+            Nacho y el equipo están listos para encontrarte mesa, recomendarte algo rico y tomarte la orden. Lo demás se resuelve con café.
+          </p>
+          <a class="ac-link" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">Escribir por WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ac-visit" aria-labelledby="visit-title">
+      <div class="ac-shell ac-visit__grid">
+        <div data-reveal>
+          <span class="ac-kicker ac-kicker--light">La mesa está puesta</span>
+          <h2 id="visit-title">Nos vemos en<br />Plaza Gavilanes.</h2>
+        </div>
+        <div class="ac-visit__details" data-reveal>
+          <p>{siteConfig.address}</p>
+          {siteConfig.hours.map((entry) => <p><span>{entry.label}</span><strong>{entry.value}</strong></p>)}
+          <div class="ac-actions">
+            <a class="ac-button ac-button--cream" href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">Cómo llegar <span aria-hidden="true">↗</span></a>
+            <a class="ac-link ac-link--light" href="/ubicacion">Ver el mapa</a>
+          </div>
         </div>
       </div>
     </section>
@@ -211,3 +185,41 @@ const structuredData = {
 
   <SiteFooter />
 </Layout>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  if (reducedMotion) {
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+    revealItems.forEach((item) => observer.observe(item));
+
+    const heroMedia = document.querySelector<HTMLElement>('[data-hero-media]');
+    let ticking = false;
+    const updateScroll = () => {
+      document.documentElement.style.setProperty('--ac-scroll', String(window.scrollY));
+      heroMedia?.style.setProperty('--hero-shift', `${Math.min(window.scrollY * 0.09, 80)}px`);
+      document.querySelector('[data-header]')?.classList.toggle('is-scrolled', window.scrollY > 32);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateScroll();
+  }
+</script>

@@ -10,8 +10,8 @@ type Props = {
 };
 
 const {
-  title = 'Auténtiko Café | Cafetería en Guadalajara, menú y café de Chiapas en línea',
-  description = 'Auténtiko Café es una cafetería en el sur de Guadalajara, en Los Gavilanes, con desayunos, buen café y café de Chiapas para llevar a casa o pedir en línea.',
+  title = 'Auténtiko Café | Café y desayuno en Plaza Gavilanes',
+  description = 'Auténtiko Café es una cafetería en Los Gavilanes, al sur de Guadalajara, con café bien servido, desayunos generosos y atención cercana.',
   image = '/og-autentiko-cafe.svg',
   robots = 'index,follow',
   structuredData,
@@ -34,6 +34,7 @@ const structuredDataPayload = structuredData
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('has-js');</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/brand/autentiko-logo.png" />
@@ -48,25 +49,25 @@ const structuredDataPayload = structuredData
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:alt" content="Auténtiko Café, cafetería en Guadalajara y café de Chiapas en línea" />
+    <meta property="og:image:alt" content="Auténtiko Café, café y desayuno en Plaza Gavilanes" />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
-    <meta name="twitter:image:alt" content="Auténtiko Café, cafetería en Guadalajara y café de Chiapas en línea" />
-    <meta name="theme-color" content="#2d6a5b" />
+    <meta name="twitter:image:alt" content="Auténtiko Café, café y desayuno en Plaza Gavilanes" />
+    <meta name="theme-color" content="#173f2b" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Familjen+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=Familjen+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     {structuredDataPayload && (
       <script is:inline type="application/ld+json" set:html={structuredDataPayload} />
     )}
   </head>
-  <body>
+  <body class="ac-site">
     <slot />
   </body>
 </html>

@@ -2,33 +2,35 @@
 import { siteConfig } from '../data/site';
 ---
 
-<footer class="site-footer">
-  <div class="shell site-footer__inner">
-    <div>
-      <p>{siteConfig.brand} · Barra diaria, cocina ligera y café de Chiapas tostado con oficio.</p>
-      <nav class="site-footer__nav" aria-label="Navegación del sitio">
-        <a href="/">Inicio</a>
-        <a href="/menu">Menú</a>
-        <a href="/cafe-en-linea">Café en línea</a>
-        <a href="/ubicacion">Ubicación</a>
-      </nav>
-      <nav class="site-footer__nav" aria-label="Enlaces legales">
-        <a href="/aviso-de-privacidad">Aviso de privacidad</a>
-        <a href="/terminos-de-compra">Términos de compra</a>
-        <a href="/envios-cancelaciones-y-devoluciones">Envíos, cancelaciones y devoluciones</a>
-      </nav>
+<footer class="ac-footer">
+  <div class="ac-shell ac-footer__grid">
+    <div class="ac-footer__brand">
+      <img src="/brand/autentiko-logo.svg" alt="" width="88" height="88" />
+      <p>Auténtiko Café</p>
+      <span>Café, desayuno y sobremesa.</span>
     </div>
 
-    <div class="site-footer__meta">
+    <div class="ac-footer__block">
+      <span class="ac-kicker">Dónde</span>
       <p>{siteConfig.address}</p>
-      <p>Tlajomulco, Jalisco · Envíos a todo México · También puedes recoger en tienda</p>
-      <p>
-        <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">
-          WhatsApp {siteConfig.whatsappDisplay}
-        </a>
-        {' · '}
-        <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram</a>
-      </p>
+      <a href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">Abrir en Maps ↗</a>
     </div>
+
+    <div class="ac-footer__block">
+      <span class="ac-kicker">Cuándo</span>
+      {siteConfig.hours.map((entry) => <p>{entry.label}<br /><strong>{entry.value}</strong></p>)}
+    </div>
+
+    <div class="ac-footer__block">
+      <span class="ac-kicker">Hablemos</span>
+      <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram ↗</a>
+      <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">WhatsApp ↗</a>
+      <a href="/aviso-de-privacidad">Privacidad</a>
+    </div>
+  </div>
+
+  <div class="ac-shell ac-footer__bottom">
+    <span>© {new Date().getFullYear()} Auténtiko Café</span>
+    <span>Los Gavilanes · Tlajomulco, Jalisco</span>
   </div>
 </footer>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Nacho, anfitrión de Auténtiko Café</title>
+  <desc id="desc">Ilustración editorial de un hombre de lentes, barba y mandil que sostiene una tablet listo para tomar la orden.</desc>
+  <defs>
+    <linearGradient id="apron" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff8e9"/>
+      <stop offset="1" stop-color="#e8dbc1"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#285f3d"/>
+      <stop offset="1" stop-color="#153b29"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d79d72"/>
+      <stop offset="1" stop-color="#a86546"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#162b20" flood-opacity=".24"/>
+    </filter>
+    <filter id="paper" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="3" seed="7" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="gray"/>
+      <feComponentTransfer in="gray" result="fade"><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer>
+      <feBlend in="SourceGraphic" in2="fade" mode="multiply"/>
+    </filter>
+  </defs>
+
+  <path d="M760 102c-112-82-312-65-422 38-61 57-100 144-94 233 8 116 92 179 72 304-12 78 5 166 76 215 114 78 348 53 439-85 92-139 46-234 18-336-30-111 39-251-89-369Z" fill="#cdd7b8"/>
+  <circle cx="744" cy="221" r="84" fill="#d24b32"/>
+  <circle cx="195" cy="662" r="70" fill="#f1c65b"/>
+  <path d="M135 254c39-43 91-54 145-32-30 24-43 56-43 98-39-3-74-25-102-66Z" fill="#4d7b54" opacity=".55"/>
+  <path d="M779 735c45-15 83-3 112 37-46 11-72 40-81 87-38-23-49-64-31-124Z" fill="#4d7b54" opacity=".55"/>
+
+  <g filter="url(#shadow)">
+    <ellipse cx="557" cy="907" rx="270" ry="59" fill="#163c2a" opacity=".28"/>
+
+    <path d="M371 442c-97 39-151 141-142 288l24 155h482l34-166c17-139-42-249-156-281-71-20-174-17-242 4Z" fill="url(#shirt)"/>
+    <path d="M303 527c-68 18-103 80-104 174l17 99 90-16 20-170-23-87Z" fill="#245a3b"/>
+    <path d="M698 524c71 25 107 96 94 190l-25 104-90-22-2-180 23-92Z" fill="#1e5036"/>
+
+    <path d="M433 441 470 491h105l35-52 40 16-27 120H412l-24-119 45-15Z" fill="#112f21"/>
+    <path d="M446 459c-25 80-43 190-41 343l17 127h231l20-129c5-137-12-253-49-346l-45 34H490l-44-29Z" fill="url(#apron)"/>
+    <path d="M422 568c67 20 165 20 230-2" fill="none" stroke="#c7b99f" stroke-width="8"/>
+    <path d="M464 708h153v126c-39 25-112 25-153 0V708Z" fill="#d8cab0"/>
+    <path d="M486 736h110" fill="none" stroke="#b8a88e" stroke-width="6" stroke-linecap="round"/>
+
+    <path d="M401 278c-12 89 7 164 70 202 54 32 129 20 168-35 37-52 47-140 13-205-28-53-84-82-144-72-57 9-98 48-107 110Z" fill="url(#skin)"/>
+    <path d="M400 277c-6-63 37-133 112-143 61-8 117 25 142 81-32-25-72-37-119-32-54 5-99 33-135 94Z" fill="#28322d"/>
+    <path d="M401 278c8-41 33-75 69-92-14 31-18 54-17 88l-52 4Z" fill="#59605b"/>
+    <path d="M453 185c35-24 90-31 135-16-41 4-75 18-101 43l-34-27Z" fill="#747974"/>
+    <path d="M592 179c31 11 54 31 70 58-28-18-56-27-85-28l15-30Z" fill="#505853"/>
+
+    <path d="M431 340c11 72 49 119 111 122 58 2 101-41 117-108-21 23-47 37-78 39-63 4-104-15-150-53Z" fill="#67635d" opacity=".82"/>
+    <path d="M480 401c33 25 82 27 116 2-13 34-36 52-61 51-25-1-44-19-55-53Z" fill="#eee1cf" opacity=".72"/>
+    <path d="M508 338c15 13 35 13 50 0" fill="none" stroke="#7d4c39" stroke-width="7" stroke-linecap="round"/>
+    <path d="M516 353c11 6 24 6 34 0" fill="none" stroke="#6b3d31" stroke-width="6" stroke-linecap="round"/>
+
+    <g fill="none" stroke="#1a2420" stroke-width="10">
+      <rect x="419" y="275" width="91" height="64" rx="22" transform="rotate(2 419 275)"/>
+      <rect x="559" y="275" width="91" height="64" rx="22" transform="rotate(-3 559 275)"/>
+      <path d="M509 300c17-9 33-9 50 0"/>
+      <path d="M418 297 390 288"/>
+      <path d="m649 294 24-12"/>
+    </g>
+    <ellipse cx="468" cy="306" rx="10" ry="8" fill="#18231f"/>
+    <ellipse cx="605" cy="305" rx="10" ry="8" fill="#18231f"/>
+    <path d="M452 264c17-11 38-12 55-2M572 260c18-8 38-6 54 5" fill="none" stroke="#4f3b30" stroke-width="8" stroke-linecap="round"/>
+
+    <g transform="translate(618 594) rotate(6)">
+      <rect width="184" height="260" rx="24" fill="#17211e"/>
+      <rect x="10" y="11" width="164" height="225" rx="16" fill="#31413b"/>
+      <circle cx="92" cy="247" r="7" fill="#7d8d83"/>
+      <path d="M39 65h104M39 94h81M39 123h95" stroke="#b9c5ba" stroke-width="8" stroke-linecap="round" opacity=".65"/>
+      <circle cx="139" cy="181" r="19" fill="#d24b32"/>
+      <path d="m131 181 6 7 12-15" fill="none" stroke="#fff4dd" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <path d="M680 781c27-6 53 6 63 29 9 22-3 43-27 50-24 6-51-5-60-26-10-22 1-47 24-53Z" fill="url(#skin)"/>
+    <path d="M281 774c-27-5-52 9-60 32-8 22 6 42 30 47 25 5 50-8 58-29 8-23-5-46-28-50Z" fill="url(#skin)"/>
+  </g>
+
+  <g transform="translate(105 790)" filter="url(#shadow)">
+    <ellipse cx="103" cy="126" rx="105" ry="24" fill="#173a29" opacity=".22"/>
+    <path d="M24 53h152v44c0 43-31 67-76 67S24 140 24 97V53Z" fill="#fff9ed" stroke="#1e5036" stroke-width="8"/>
+    <path d="M176 73h17c37 0 41 54 5 63h-27" fill="none" stroke="#1e5036" stroke-width="10"/>
+    <ellipse cx="100" cy="54" rx="77" ry="22" fill="#6e3e29"/>
+    <path d="M78 57c15-12 30-12 45 0 12 10 25 10 38-1" fill="none" stroke="#e9c69e" stroke-width="5" stroke-linecap="round" opacity=".72"/>
+    <path d="M76 31c-20-26 16-34-1-59M108 26c-15-22 14-31 2-53M137 31c-11-20 11-27 5-45" fill="none" stroke="#fff5df" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+  </g>
+
+  <g opacity=".55" fill="none" stroke="#1e5036" stroke-width="8" stroke-linecap="round">
+    <path d="M128 150c38-45 78-58 120-39"/>
+    <path d="M712 925c34-26 70-27 108-4"/>
+  </g>
+  <g filter="url(#paper)" opacity=".24"><rect width="920" height="1040" fill="#6d5b44"/></g>
+</svg>

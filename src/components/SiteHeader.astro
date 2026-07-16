@@ -4,47 +4,46 @@ type Props = {
 };
 
 const { currentPath = '/' } = Astro.props;
-
-type NavItem = {
-  href: string;
-  label: string;
-  mobileLabel?: string;
-};
-
-const navItems: NavItem[] = [
+const navItems = [
   { href: '/', label: 'Inicio' },
   { href: '/menu', label: 'Menú' },
-  { href: '/cafe-en-linea', label: 'Café en línea', mobileLabel: 'Pedir café' },
-  { href: '/ubicacion', label: 'Ubicación' },
+  { href: '/ubicacion', label: 'Visítanos' },
 ];
 ---
 
-<header class="site-header">
-  <div class="shell site-header__inner">
-    <a class="brand-lockup" href="/" aria-label="Ir al inicio de Auténtiko Café">
-      <img src="/brand/autentiko-logo.svg" alt="" width="96" height="96" />
-      <div>
-        <strong>Auténtiko Café</strong>
-        <span>Tlajomulco, Jalisco</span>
-      </div>
+<header class="ac-header" data-header>
+  <div class="ac-shell ac-header__inner">
+    <a class="ac-brand" href="/" aria-label="Ir al inicio de Auténtiko Café">
+      <span class="ac-brand__mark">
+        <img src="/brand/autentiko-logo.svg" alt="" width="72" height="72" />
+      </span>
+      <span class="ac-brand__name">Auténtiko Café</span>
     </a>
 
-    <nav class="site-nav" aria-label="Navegación principal">
+    <nav class="ac-desktop-nav" aria-label="Navegación principal">
       {navItems.map((item) => (
-        <a class="nav-link" href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>
-          {item.mobileLabel ? (
-            <>
-              <span class="nav-label nav-label--desktop">{item.label}</span>
-              <span class="nav-label nav-label--mobile">{item.mobileLabel}</span>
-            </>
-          ) : (
-            item.label
-          )}
-        </a>
+        <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
       ))}
-      <a class="nav-link" href="https://www.instagram.com/somosautentikocafe/" target="_blank" rel="noreferrer">
-        Instagram
+      <a class="ac-header__cta" href="https://maps.app.goo.gl/b7r8fS9QDR7jtida8" target="_blank" rel="noreferrer">
+        Cómo llegar <span aria-hidden="true">↗</span>
       </a>
     </nav>
+
+    <details class="ac-mobile-nav">
+      <summary aria-label="Abrir navegación"><span></span><span></span></summary>
+      <nav aria-label="Navegación móvil">
+        {navItems.map((item) => (
+          <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
+        ))}
+        <a href="https://www.instagram.com/somosautentikocafe/" target="_blank" rel="noreferrer">Instagram ↗</a>
+      </nav>
+    </details>
   </div>
 </header>
+
+<script>
+  const mobileNav = document.querySelector<HTMLDetailsElement>('.ac-mobile-nav');
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => mobileNav.removeAttribute('open'));
+  });
+</script>

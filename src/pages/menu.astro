@@ -4,9 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { siteConfig } from '../data/site';
-import bebidaHeroImage from '../assets/products/bebida-2.jpeg';
-import bebidaImage from '../assets/products/bebida.jpeg';
-import flatWhiteImage from '../assets/products/flat-white.jpeg';
+import bebidaImage from '../assets/products/bebida-2.jpeg';
 import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
 
 const structuredData = {
@@ -20,10 +18,11 @@ const structuredData = {
     hasMenuItem: section.items.map((item) => ({
       '@type': 'MenuItem',
       name: item.name,
+      description: item.description,
       offers: {
         '@type': 'Offer',
         priceCurrency: 'MXN',
-        price: item.price.replace('$', ''),
+        price: item.price.match(/\d+/)?.[0],
       },
     })),
   })),
@@ -31,86 +30,127 @@ const structuredData = {
 ---
 
 <Layout
-  title="Menú | Auténtiko Café"
-  description="Explora el menú completo de Auténtiko Café: bebidas calientes, frías, frappés, baguettes y desayunos en el sur de Guadalajara."
+  title="Menú nuevo | Auténtiko Café"
+  description="Consulta el menú actualizado de Auténtiko Café: café, bebidas frías, frappés, baguettes, hot cakes, huevos, toast, chilaquiles y más."
   structuredData={structuredData}
 >
   <SiteHeader currentPath="/menu" />
 
-  <main>
-    <section class="section page-hero">
-      <div class="shell page-hero__grid">
-        <div class="page-hero__copy">
-          <span class="eyebrow">Menú completo</span>
-          <h1 class="display display--page">Todo lo que sale de la barra y la cocina, en un solo lugar.</h1>
-          <p class="lede">
-            Aquí está el menú completo de Auténtiko Café: bebidas calientes, frías, frappés,
-            baguettes, desayunos y antojos de la casa para revisar con calma antes de venir o escribir.
-          </p>
-          <div class="hero-badges">
-            <span class="pill"><strong>Chilaquiles</strong> $139</span>
-            <span class="pill"><strong>Huevos auténtikos</strong> $135</span>
-            <span class="pill"><strong>WhatsApp</strong> para dudas o pedidos</span>
-          </div>
+  <main class="ac-menu-page">
+    <section class="ac-menu-hero">
+      <div class="ac-shell ac-menu-hero__grid">
+        <div>
+          <span class="ac-kicker">El menú · 2026</span>
+          <h1>Come.<br /><em>Toma.</em><br />Repite.</h1>
+          <p>Todo se prepara al momento. Los precios están expresados en pesos mexicanos.</p>
         </div>
-
-        <div class="visual-stack">
-          <figure class="visual-card visual-card--portrait">
-            <Image src={bebidaHeroImage} alt="Bebida servida en Auténtiko Café" widths={[480, 720, 960]} sizes="(max-width: 60rem) 100vw, 33vw" />
-          </figure>
-          <div class="visual-stack__pair">
-            <figure class="visual-card">
-              <Image src={flatWhiteImage} alt="Flat white servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 50vw, 16vw" />
-            </figure>
-            <figure class="visual-card">
-              <Image src={chilaquilesImage} alt="Chilaquiles servidos en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 60rem) 50vw, 16vw" />
-            </figure>
-          </div>
-        </div>
+        <figure class="ac-menu-hero__photo">
+          <Image src={bebidaImage} alt="Bebida fría de Auténtiko Café" widths={[600, 900, 1200]} sizes="(max-width: 52rem) 100vw, 42vw" loading="eager" />
+          <figcaption>Una pausa fría, aunque el día venga caliente.</figcaption>
+        </figure>
+        <img class="ac-menu-hero__seal" src="/brand/coffee-sun.svg" alt="" width="220" height="220" aria-hidden="true" />
       </div>
     </section>
 
-    <section class="section section--menu">
-      <div class="shell">
-        <div class="menu-grid">
-          {siteConfig.menuSections.map((section) => (
-            <article class="menu-card" id={section.id}>
-              <span class="eyebrow">{section.eyebrow}</span>
-              <h2>{section.title}</h2>
-              <p>{section.note}</p>
+    <nav class="ac-menu-nav" aria-label="Secciones del menú">
+      <div class="ac-shell">
+        {siteConfig.menuSections.map((section) => (
+          <a href={`#${section.id}`} data-menu-link={section.id}>{section.title}</a>
+        ))}
+      </div>
+    </nav>
 
-              <ul class={section.id === 'baguettes' || section.id === 'desayunos' ? 'menu-food-list' : 'menu-list'}>
-                {section.items.map((item) => (
-                  <li>
-                    <div class="menu-item">
-                      <strong>{item.name}</strong>
-                      <span>{item.price}</span>
-                    </div>
-                    {item.description && <p class="menu-item-desc">{item.description}</p>}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+    <section class="ac-menu-book">
+      <div class="ac-shell">
+        <div class="ac-menu-book__intro" data-reveal>
+          <span>PARA TOMAR</span>
+          <p>Espresso, hielo, leche y café de Chiapas.</p>
         </div>
 
-        <div class="menu-bottom-grid">
-          <article class="note-card">
-            <strong>Algo frío para la tarde</strong>
-            <p>
-              Frappés, bebidas frías y café bien servido para cuando pega el calor. Si quieres pedir
-              algo para pasar por ello, escríbenos por WhatsApp.
-            </p>
-            <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+        {siteConfig.menuSections.map((section, index) => (
+          <article
+            class:list={['ac-menu-section', { 'ac-menu-section--kitchen': index >= 5 }]}
+            id={section.id}
+            data-menu-section={section.id}
+            data-reveal
+          >
+            {index === 5 && (
+              <div class="ac-menu-divider">
+                <span>PARA COMER</span>
+                <p>Pan, huevos, salsa y desayunos de los que arreglan el día.</p>
+              </div>
+            )}
+
+            <header>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <small>{section.eyebrow}</small>
+                <h2>{section.title}</h2>
+                <p>{section.note}</p>
+              </div>
+            </header>
+
+            <ul class:list={['ac-menu-items', { 'ac-menu-items--described': section.items.some((item) => item.description) }]}>
+              {section.items.map((item) => (
+                <li>
+                  <div>
+                    <strong>{item.name}</strong>
+                    {item.description && <p>{item.description}</p>}
+                  </div>
+                  <span>{item.price}</span>
+                </li>
+              ))}
+            </ul>
           </article>
+        ))}
 
-          <figure class="visual-card visual-card--wide">
-            <Image src={bebidaImage} alt="Bebidas frías servidas en Auténtiko Café" widths={[720, 960]} sizes="(max-width: 60rem) 100vw, 36vw" />
-          </figure>
-        </div>
+        <aside class="ac-menu-note" data-reveal>
+          <div>
+            <span class="ac-kicker ac-kicker--light">¿No sabes qué pedir?</span>
+            <h2>Cuéntanos qué se te antoja.</h2>
+          </div>
+          <p>En la barra te recomendamos algo según el hambre, el clima y la hora del día.</p>
+          <a class="ac-button ac-button--cream" href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">Preguntarle al equipo <span aria-hidden="true">↗</span></a>
+        </aside>
+
+        <figure class="ac-menu-endcap" data-reveal>
+          <Image src={chilaquilesImage} alt="Plato de chilaquiles rojos en Auténtiko Café" widths={[720, 1080, 1440]} sizes="100vw" />
+          <figcaption>La respuesta casi siempre son chilaquiles.</figcaption>
+        </figure>
       </div>
     </section>
   </main>
 
   <SiteFooter />
 </Layout>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  if (reducedMotion) {
+    revealItems.forEach((item) => item.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    revealItems.forEach((item) => revealObserver.observe(item));
+  }
+
+  const menuLinks = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-menu-link]')].map((link) => [link.dataset.menuLink, link]),
+  );
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        menuLinks.forEach((link) => link.removeAttribute('aria-current'));
+        menuLinks.get((entry.target as HTMLElement).dataset.menuSection)?.setAttribute('aria-current', 'true');
+      }
+    });
+  }, { rootMargin: '-18% 0px -68% 0px' });
+  document.querySelectorAll('[data-menu-section]').forEach((section) => sectionObserver.observe(section));
+</script>

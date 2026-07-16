@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title">
+  <title id="title">Sello solar de café de Auténtiko</title>
+  <circle cx="160" cy="160" r="148" fill="#d24b32"/>
+  <circle cx="160" cy="160" r="102" fill="#f4d15f"/>
+  <g fill="#1d4f35">
+    <path d="M153 72c-34 11-53 45-45 81 9 40 43 74 67 96 2-43 10-75 28-108 18-33-11-81-50-69Z"/>
+    <path d="M121 226c38-39 59-86 63-141 12 51-1 111-39 156l-24-15Z" fill="#f8f0dd"/>
+  </g>
+  <g stroke="#1d4f35" stroke-width="8" stroke-linecap="round">
+    <path d="M160 6v26M160 288v26M6 160h26M288 160h26M51 51l19 19M250 250l19 19M269 51l-19 19M70 250l-19 19"/>
+  </g>
+</svg>
