@@ -6,9 +6,9 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { siteConfig } from '../data/site';
 import heroTable from '../assets/editorial/autentiko-table.png';
 import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
-import huevosImage from '../assets/products/huevos-autentikos-2.jpeg';
+import burritosImage from '../assets/products/burritos-chicharron.jpeg';
+import toastImage from '../assets/products/toast-desayuno.jpeg';
 import flatWhiteImage from '../assets/products/flat-white.jpeg';
-import bebidaImage from '../assets/products/bebida-3.jpeg';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -116,12 +116,12 @@ const structuredData = {
             <figcaption><span>02</span><strong>Flat white</strong><small>Una taza precisa, sin hacer tanto ruido.</small></figcaption>
           </figure>
           <figure class="ac-food ac-food--wide" data-reveal>
-            <Image src={huevosImage} alt="Desayuno de huevos servido en Auténtiko Café" widths={[640, 960]} sizes="(max-width: 52rem) 100vw, 44vw" />
-            <figcaption><span>03</span><strong>Desayuno Auténtiko</strong><small>Para llegar con hambre.</small></figcaption>
+            <Image src={burritosImage} alt="Burritos de chicharrón servidos en Auténtiko Café" widths={[640, 960]} sizes="(max-width: 52rem) 100vw, 44vw" />
+            <figcaption><span>03</span><strong>Burritos de chicharrón</strong><small>Doraditos, servidos con aguacate.</small></figcaption>
           </figure>
           <figure class="ac-food ac-food--small" data-reveal>
-            <Image src={bebidaImage} alt="Bebida fría preparada en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 52rem) 80vw, 26vw" />
-            <figcaption><span>04</span><strong>Barra fría</strong><small>La tarde, pero con hielo.</small></figcaption>
+            <Image src={toastImage} alt="Toast de desayuno con ensalada servido en Auténtiko Café" widths={[480, 720]} sizes="(max-width: 52rem) 80vw, 26vw" />
+            <figcaption><span>04</span><strong>Toast de desayuno</strong><small>Para llegar con hambre.</small></figcaption>
           </figure>
         </div>
       </div>

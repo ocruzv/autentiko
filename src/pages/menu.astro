@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { siteConfig } from '../data/site';
-import bebidaImage from '../assets/products/bebida-2.jpeg';
+import bebidaImage from '../assets/products/bebida.jpeg';
 import chilaquilesImage from '../assets/products/chilaquiles.jpeg';
 
 const structuredData = {
@@ -54,6 +54,14 @@ const structuredData = {
 
     <nav class="ac-menu-nav" aria-label="Secciones del menú">
       <div class="ac-shell">
+        <label class="ac-menu-nav__select">
+          <span>Índice</span>
+          <select aria-label="Ir a una sección del menú" data-menu-select>
+            {siteConfig.menuSections.map((section) => (
+              <option value={section.id}>{section.title}</option>
+            ))}
+          </select>
+        </label>
         {siteConfig.menuSections.map((section) => (
           <a href={`#${section.id}`} data-menu-link={section.id}>{section.title}</a>
         ))}
@@ -144,11 +152,22 @@ const structuredData = {
   const menuLinks = new Map(
     [...document.querySelectorAll<HTMLAnchorElement>('[data-menu-link]')].map((link) => [link.dataset.menuLink, link]),
   );
+  const menuSelect = document.querySelector<HTMLSelectElement>('[data-menu-select]');
+  menuSelect?.addEventListener('change', () => {
+    const section = document.getElementById(menuSelect.value);
+    if (section) {
+      section.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+      history.replaceState(null, '', `#${menuSelect.value}`);
+    }
+  });
+
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         menuLinks.forEach((link) => link.removeAttribute('aria-current'));
-        menuLinks.get((entry.target as HTMLElement).dataset.menuSection)?.setAttribute('aria-current', 'true');
+        const activeSection = (entry.target as HTMLElement).dataset.menuSection;
+        menuLinks.get(activeSection)?.setAttribute('aria-current', 'true');
+        if (menuSelect && activeSection) menuSelect.value = activeSection;
       }
     });
   }, { rootMargin: '-18% 0px -68% 0px' });

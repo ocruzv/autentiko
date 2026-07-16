@@ -11,18 +11,18 @@ import { siteConfig } from '../data/site';
     </div>
 
     <div class="ac-footer__block">
-      <span class="ac-kicker">Dónde</span>
+      <span class="ac-kicker ac-kicker--light">Dónde</span>
       <p>{siteConfig.address}</p>
       <a href={siteConfig.mapsUrl} target="_blank" rel="noreferrer">Abrir en Maps ↗</a>
     </div>
 
     <div class="ac-footer__block">
-      <span class="ac-kicker">Cuándo</span>
+      <span class="ac-kicker ac-kicker--light">Cuándo</span>
       {siteConfig.hours.map((entry) => <p>{entry.label}<br /><strong>{entry.value}</strong></p>)}
     </div>
 
     <div class="ac-footer__block">
-      <span class="ac-kicker">Hablemos</span>
+      <span class="ac-kicker ac-kicker--light">Hablemos</span>
       <a href={siteConfig.instagramUrl} target="_blank" rel="noreferrer">Instagram ↗</a>
       <a href={siteConfig.whatsappUrl} target="_blank" rel="noreferrer">WhatsApp ↗</a>
       <a href="/aviso-de-privacidad">Privacidad</a>

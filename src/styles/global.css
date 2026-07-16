@@ -2524,6 +2524,10 @@ body.ac-site::before {
   display: none;
 }
 
+.ac-menu-nav__select {
+  display: none;
+}
+
 .ac-menu-nav a {
   flex: 0 0 auto;
   padding: 0.55rem 0.8rem;
@@ -3154,6 +3158,44 @@ body.ac-site::before {
   .ac-menu-hero__photo { width: 92%; }
 
   .ac-menu-nav { top: 4.35rem; }
+
+  .ac-menu-nav > div {
+    overflow: visible;
+    padding-block: 0.55rem;
+  }
+
+  .ac-menu-nav a {
+    display: none;
+  }
+
+  .ac-menu-nav__select {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .ac-menu-nav__select > span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ac-menu-nav__select select {
+    width: 100%;
+    min-width: 0;
+    padding: 0.65rem 2.4rem 0.65rem 0.9rem;
+    border: 1px solid color-mix(in oklab, var(--ac-cream) 28%, transparent);
+    border-radius: 999px;
+    color: var(--ac-forest-dark);
+    background: var(--ac-butter);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
 
   .ac-menu-book__intro,
   .ac-menu-divider {
